@@ -75,12 +75,14 @@ var menubar ={
     	var fileul = $('<ul>',{
     		'class':'dropdown-menu'
     	});
-    	var newli = $('<li>');
-    	var newa = $('<a>',{
-    		'href':'#',
-    		'text':'新建... Ctrl+N'
-    	});
-    	newli.append(newa);
+    	
+    	var newli = this.fileNewSubmenu();
+    	// var newli = $('<li>');
+    	// var newa = $('<a>',{
+    	// 	'href':'#',
+    	// 	'text':'新建... Ctrl+N'
+    	// });
+    	// newli.append(newa);
     	var openli = $('<li>');
     	var opena = $('<a>',{
     		'href':'#',
@@ -130,6 +132,33 @@ var menubar ={
     	fileli.append(fileul);
 
     	return fileli;
+    },
+
+    //用来创建文件菜单中新建的下一级菜单
+    fileNewSubmenu:function(){
+    	var newli = $('<li>',{
+    		'class':'dropdown-submenu'
+    	});
+    	var newa = $('<a>',{
+    		'href':'#',
+    		'text':'新建... Ctrl+N'
+    	});
+    	var newul = $('<ul>',{
+    		'class':'dropdown-menu'
+    	});
+    	var newsubmenu = ['创建新项目','创建脚本','创建场景'];
+    	for(var i=0;i<newsubmenu.length;i++){
+    		var tmpa=$('<a>',{
+    			'href':'#',
+    			'text':newsubmenu[i]
+    		});
+    		var submenuli = $('<li>');
+    		submenuli.append(tmpa);
+    		newul.append(submenuli);
+    	}
+    	newli.append(newa);
+    	newli.append(newul);
+    	return newli;
     },	
 
     //这是用来生产编辑菜单
