@@ -42,7 +42,8 @@
 #container {
   width: 100%;
   height: 100%;
-  border: 1px solid #dadada;
+  border: 1px;
+  solid: #dadada;
 }
 #container #menubar {
   position: relative;
@@ -61,4 +62,28 @@
   float: left;
   width: 59%;
   border: 1px solid #dadada;
+}
+.startProjectModalBody {
+  width: 500px;
+  height: 380px;
+}
+.startProjectModalBody .currentOpenProject {
+  width: 65%;
+  height: 100%;
+  float: left;
+  border-right: 1px solid:#0000ff;
+}
+.startProjectModalBody .currentOpenProject .currentProjectBody {
+  width: 236px;
+  height: 258px;
+}
+.startProjectModalBody .currentOpenProject .currentProjectBody .currentOpenProjectSelect {
+  width: 100%;
+  height: 100%;
+}
+.startProjectModalBody .creatNewProject {
+  width: 35%;
+  height: 100%;
+  float: left;
+  border-left: 1px solid #0000ff;
 }
