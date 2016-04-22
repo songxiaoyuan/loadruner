@@ -337,7 +337,7 @@ var menubar ={
     		'role':'button',
     		'aria-haspopup':'true',
     		'aria-expanded':'false',
-    		'text':'文件'
+    		'text':'项目'
     	});
     	var span = $('<span>',{
     		'class':'caret'

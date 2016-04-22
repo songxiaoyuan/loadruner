@@ -39,11 +39,12 @@ var newProjectModal = {
 	projectModalBody:function(){
 		var modalBody = $('<div>',{
 			'class':'modal-body',
+			'id':'projectModalBody'
 		});
 		//注意，在里面添加具体内容，还是要加入div来添加
 		var startProjectModalBody=this.startProjectModalBody();
 		modalBody.append(startProjectModalBody);
-		
+
 		// var newProjectModalBody = this.newProjectModalBody();
 		// modalBody.append(newProjectModalBody);
 		return modalBody;
@@ -51,19 +52,22 @@ var newProjectModal = {
 	projectModalFooter:function(){
 		var modalFooter = $('<div>',{
 			'class':'projectModalFooter modal-footer',
+			'id':'projectModalFooter'
 		});
 		var closeButton = $('<button>',{
 			'class':'btn btn-default',
 			'data-dismiss':'modal',
-			'text':'关闭'     //注意，关闭之后就要把这个整体的model在container中删除
+			'id':'projectModalFooterQuit',
+			'onclick':'newProjectModal.removeNewprojectModal()',
+			'text':'退出'     //注意，关闭之后就要把这个整体的model在container中删除
 		});
-		var saveButton = $('<button>',{
-			'class':'btn btn-primary',
-			'text':'保存'
-		});
+		// var saveButton = $('<button>',{
+		// 	'class':'btn btn-primary',
+		// 	'text':'保存'
+		// });
 
 		modalFooter.append(closeButton);
-		modalFooter.append(saveButton);
+		// modalFooter.append(saveButton);
 		return modalFooter;
 	},
 
@@ -71,6 +75,7 @@ var newProjectModal = {
 	startProjectModalBody:function(){
 		var ret = $('<div>',{
 			'class':'startProjectModalBody',
+			'id':'startProjectModalBody'
 		});
 		currentOpenProject =  this.currentOpenProjectBody();
 		var creatNewProject = $('<div>',{
@@ -82,10 +87,13 @@ var newProjectModal = {
 		});
 		var creatNewProjectButton = $('<button>',{
 			'class':'creatNewProjectButton',
+			'id':'creatNewProjectButton',
+			'onclick':'newProjectModal.createNewProjectButtonOnClick()',
 			'text':'创建项目'
 		});
 		var creatProjectFromExistedButton = $('<button>',{
 			'class':'creatProjectFromExistedButton',
+			'id':'creatProjectFromExistedButton',
 			'text':'从已有项目中创建'
 		});
 
@@ -149,6 +157,7 @@ var newProjectModal = {
 	newProjectModalBody:function(){
 		var ret = $('<div>',{
 			'class':'newProjectModalBody',
+			'id':'newProjectModalBody'
 		});
 		
 		var newProjectModalBodyHeader = $('<div>',{
@@ -183,7 +192,7 @@ var newProjectModal = {
 		});
 		var savePathInput = $('<input>',{
 			'type':'text',
-			'placeholder':'/home/user/project1'
+			'placeholder':'/home/user/project1'  //注意这个是用来提示输入的，真正的值应该是value！！！
 		});
 		var savePathBrowse = $('<input>',{
 			'type':'file',
@@ -250,6 +259,93 @@ var newProjectModal = {
 		ret.append(newProjectModalBodyHeader);
 		ret.append(newProjectModalBodyContent);
 		return ret;
+	},
+
+	//此函数的作用是用来产生点击创建项目函数所发生的操作，包括将以前的startProjectModalBody div隐藏
+	//然后将newProjectModalBody div显示，加上修改modal-footer的部分，添加取消，确定，和上一步的button。
+	createNewProjectButtonOnClick:function(){
+
+		//隐藏以前div，
+		$('#startProjectModalBody').hide();
+
+		//添加显示现在div 如果有，表示是点击过上一步，直接显示就可以了
+		if($('#newProjectModalBody').length>0){
+			$('#newProjectModalBody').show();
+		}
+		else{
+			var newProjectModalBody = newProjectModal.newProjectModalBody();
+			$('#projectModalBody').append(newProjectModalBody);
+		}
+
+		//添加modal-footer
+		$('#projectModalFooterQuit').hide();
+		if($('#creatNewProjectFooterButtons').length > 0){
+			$('#creatNewProjectFooterButtons').show();
+		}
+		else{
+			var creatNewProjectFooterButtons = newProjectModal.creatNewProjectFooterButtons();
+			$('#projectModalFooter').append(creatNewProjectFooterButtons);
+		}
+
+	},
+
+	//次函数的作用是用来产生创建新项目页面的modal角标的3个button，返回一个div。
+	creatNewProjectFooterButtons:function(){
+		var ret = $('<div>',{
+			'class':'creatNewProjectFooterButtons',
+			'id':'creatNewProjectFooterButtons'
+		});
+		var creatNewProjectFooterButtonsBack = $('<button>',{
+			'class':'creatNewProjectFooterButtonsBack btn btn-default',
+			'id':'creatNewProjectFooterButtonsBack',
+			'onclick':'newProjectModal.creatNewProjectFooterButtonsBackOnClick()',
+			'text':'上一步'
+		});
+		var creatNewProjectFooterButtonsConfirm = $('<button>',{
+			'class':'creatNewProjectFooterButtonsConfirm btn btn-default',
+			'data-dismiss':'modal',
+			'id':'creatNewProjectFooterButtonsConfirm',
+			'onclick':'newProjectModal.creatNewProjectFooterButtonsConfirmOnClick()',
+			'text':'确定'
+		});
+		var creatNewProjectFooterButtonsCancel = $('<button>',{
+			'class':'creatNewProjectFooterButtonsCancel btn btn-default',
+			'data-dismiss':'modal',
+			'id':'creatNewProjectFooterButtonsCancel',
+			'onclick':'newProjectModal.removeNewprojectModal()',
+			'text':'取消'
+		});
+
+		ret.append(creatNewProjectFooterButtonsBack);
+		ret.append(creatNewProjectFooterButtonsConfirm);
+		ret.append(creatNewProjectFooterButtonsCancel);
+		return ret;
+	},
+
+	//creatNewProjectFooterButtonsBack按钮click时的操作，就是回到上一个页面
+	creatNewProjectFooterButtonsBackOnClick:function(){
+		//处理footer部分.
+		$('#creatNewProjectFooterButtons').hide();
+		$('#projectModalFooterQuit').show();
+
+		//处理body部分
+		$('#newProjectModalBody').hide();
+		$('#startProjectModalBody').show();
+	},
+
+	//creatNewProjectFooterButtonsConfirm按钮click时的操作。保存一些路径信息，删除整个modal，然后显示整个背景项目等div！！
+	creatNewProjectFooterButtonsConfirmOnClick:function(){
+		//TODO 保存信息到本地，然后创建背景的所有div.
+		$("#newprojectModal").on('hidden.bs.modal',function(){
+			$('#newprojectModal').remove();
+		});
+	},
+
+	//creatNewProjectFooterButtonsCancel按钮click时的操作。也就是删除整个modal，这个可以公用。
+	removeNewprojectModal:function(){
+		$("#newprojectModal").on('hidden.bs.modal',function(){
+			$('#newprojectModal').remove();
+		});
 	},
 
 }
