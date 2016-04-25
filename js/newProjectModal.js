@@ -217,23 +217,25 @@ var newProjectModal = {
 		projectFounder.append(projectFounderInput);
 
 		var projectCreateDate = $('<div>',{
-			'class':'form-group'
+			'class':'projectCreateDate'
 		});
 		var projectCreateDateLabel = $('<label>',{
 			'for':'projectNameLabel',
 			'text':'创建日期'
 		});
 		var projectCreateDateInput = $('<input>',{
+			'id':'selectDate',
 			'type':'text',
-			'placeholder':'2016.04.22'
 		});
-		var projectCreateDateSelect = $('<input>',{
-			'type':'file',
-			'text':'选择',   //TODO注意此处应该是选择之后，在projectCreateDateInput内放入时间的！！
+		var selectSpan = $('<button>',{
+		  'text':'选择',
+		  'id':'selectDateButton',
+		  'data-date':'2016.04.22',
+		  'data-date-format':'yyyy.mm.dd'
 		});
 		projectCreateDate.append(projectCreateDateLabel);
 		projectCreateDate.append(projectCreateDateInput);
-		projectCreateDate.append(projectCreateDateSelect);
+		projectCreateDate.append(selectSpan);
 
 		var remarkInfo = $('<div>',{
 			'class':'form-group'
@@ -286,6 +288,7 @@ var newProjectModal = {
 			var creatNewProjectFooterButtons = newProjectModal.creatNewProjectFooterButtons();
 			$('#projectModalFooter').append(creatNewProjectFooterButtons);
 		}
+		newProjectModal.buddleDataTimePicker();
 
 	},
 
@@ -345,6 +348,14 @@ var newProjectModal = {
 	removeNewprojectModal:function(){
 		$("#newprojectModal").on('hidden.bs.modal',function(){
 			$('#newprojectModal').remove();
+		});
+	},
+	//这是用来产生时间的控件
+	buddleDataTimePicker:function(){
+		$('#selectDateButton').datepicker().on('changeDate',function(ev) {
+		  var selectDate = $('#selectDateButton').data('date')
+		  $('#selectDate')[0].value=selectDate;
+		  $('#selectDateButton').datepicker('hide');
 		});
 	},
 
