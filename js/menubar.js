@@ -77,12 +77,6 @@ var menubar ={
     	});
     	
     	var newli = this.fileNewSubmenu();
-    	// var newli = $('<li>');
-    	// var newa = $('<a>',{
-    	// 	'href':'#',
-    	// 	'text':'新建... Ctrl+N'
-    	// });
-    	// newli.append(newa);
     	var openli = $('<li>');
     	var opena = $('<a>',{
     		'href':'#',
@@ -150,8 +144,29 @@ var menubar ={
     	for(var i=0;i<newsubmenu.length;i++){
     		var tmpa=$('<a>',{
     			'href':'#',
-    			'text':newsubmenu[i]
+    			'text':newsubmenu[i],
+                // 'onclick':'menubar.onClickTest(i)'
     		});
+            switch (i){
+                case 0:
+                  tmpa.click(function(){
+                      menubar.createProjectonClick();
+                  });
+                  break;
+                case 1:
+                  tmpa.click(function(){
+                    menubar.createScriptClick();
+                  });
+                  break;
+                case 2:
+                  tmpa.click(function(){
+                    menubar.createSceneClick();
+                  });
+                  break;
+                default:
+                  break;
+            }
+            
     		var submenuli = $('<li>');
     		submenuli.append(tmpa);
     		newul.append(submenuli);
@@ -723,4 +738,14 @@ var menubar ={
 
     	return helpli;
     },	
+
+    createProjectonClick:function(){
+       window.alert('createProjectonClick!');
+    },
+    createScriptClick:function(){
+        window.alert('createScriptClick!');
+    },
+    createSceneClick:function(){
+        window.alert('createSceneClick!');
+    },
 }
