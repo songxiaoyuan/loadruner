@@ -178,31 +178,24 @@ var newProjectModal = {
 	creatProjectFromExistedButtonOnClick:function(){
 		//TODO:
 
-		// //隐藏以前div，
-		// $('#startProjectModalBody').hide();
+		//隐藏以前div，
+		$('#startProjectModalBody').hide();
+		$('#projectModalFooterQuit').hide();
 
-		// //添加显示现在div 如果有，表示是点击过上一步，直接显示就可以了
-		// if($('#creatProjectFromExistedBody1').length>0){
-		// 	$('#creatProjectFromExistedBody1').show();
-		// 	$('#creatProjectFromExistedHeader').show();
-		// }
-		// else{
-		// 	var creatProjectFromExistedBody1 = newProjectModal.creatProjectFromExistedBody1();
-		// 	var creatProjectFromExistedHeader = newProjectModal.creatProjectFromExistedHeader();
-		// 	$('#projectModalBody').append(creatProjectFromExistedBody1);
-		// 	$('#projectModalHeader').append(creatProjectFromExistedHeader);
-		// }
-
-		// //添加modal-footer
-		// $('#projectModalFooterQuit').hide();
-		// if($('#creatProjectModalFooter').length > 0){
-		// 	$('#creatProjectModalFooter').show();
-		// }
-		// else{
-		// 	var creatProjectModalFooter = newProjectModal.creatProjectModalFooter();
-		// 	$('#projectModalFooter').append(creatProjectModalFooter);
-		// }
-		// newProjectModal.buddleDataTimePicker();
+		//添加显示现在div 如果有，表示是点击过上一步，直接显示就可以了
+		if($('#creatProjectFromExistedBody1').length>0){
+			$('#creatProjectFromExistedBody1').show();
+			$('#creatProjectFromExistedHeader').show();
+			$('#creatProjectFromExistedFooter1').show();
+		}
+		else{
+			var creatProjectFromExistedBody1 = creatProjectFromExistedModalPage.creatProjectFromExistedBody1();
+			var creatProjectFromExistedHeader = creatProjectFromExistedModalPage.creatProjectFromExistedHeader();
+			var creatProjectFromExistedFooter1 = creatProjectFromExistedModalPage.creatProjectFromExistedFooter1();
+			$('#projectModalBody').append(creatProjectFromExistedBody1);
+			$('#projectModalHeader').append(creatProjectFromExistedHeader);
+			$('#projectModalFooter').append(creatProjectFromExistedFooter1);
+		}
 
 	},
 
@@ -215,7 +208,7 @@ var newProjectModal = {
 	//这是用来产生时间的控件
 	buddleDataTimePicker:function(){
 		$('#selectDateButton').datepicker().on('changeDate',function(ev) {
-		  var selectDate = $('#selectDateButton').data('date')
+		  var selectDate = $('#selectDateButton').data('date');
 		  $('#selectDate')[0].value=selectDate;
 		  $('#selectDateButton').datepicker('hide');
 		});

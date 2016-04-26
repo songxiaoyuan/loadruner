@@ -75,10 +75,12 @@ var createProjectModalPage={
 			'text':'创建日期'
 		});
 		var projectCreateDateInput = $('<input>',{
+			'class':'selectDateInput',
 			'id':'selectDate',
 			'type':'text',
 		});
 		var selectSpan = $('<button>',{
+		  'class':'selectSpanButton',
 		  'text':'选择',
 		  'id':'selectDateButton',
 		  'data-date':'2016.04.22',
