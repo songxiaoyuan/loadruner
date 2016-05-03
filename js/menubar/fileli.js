@@ -89,22 +89,21 @@ var fileli ={
     		var tmpa=$('<a>',{
     			'href':'#',
     			'text':newsubmenu[i],
-                // 'onclick':'menubar.onClickTest(i)'
     		});
             switch (i){
                 case 0:
                   tmpa.click(function(){
-                      menubar.createProjectonClick();
+                      fileli.createProjectonClick();
                   });
                   break;
                 case 1:
                   tmpa.click(function(){
-                    menubar.createScriptClick();
+                    fileli.createScriptClick();
                   });
                   break;
                 case 2:
                   tmpa.click(function(){
-                    menubar.createSceneClick();
+                    fileli.createSceneClick();
                   });
                   break;
                 default:
