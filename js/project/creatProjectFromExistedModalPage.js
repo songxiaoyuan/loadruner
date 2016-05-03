@@ -269,7 +269,7 @@ var creatProjectFromExistedModalPage = {
 		//TODO 此处应该有一些保存工作，然后创建项目的page页面。
 		//TODO
 
-
+		projectDescription.initialize();
 		//最后才是把那个modal关掉。
 		newProjectModal.removeNewprojectModal();
 	},

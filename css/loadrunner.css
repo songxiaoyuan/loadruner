@@ -1,3 +1,8 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
 .dropdown-submenu {
   position: relative;
 }
@@ -48,23 +53,28 @@
 #container #menubar {
   position: relative;
   width: 100%;
-  height: 30px;
+  height: 70px;
   border: 1px solid #dadada;
 }
-#container #projectStructure {
+#container #Structure {
   height: 100%;
   float: left;
-  width: 40%;
-  border: 1px solid #dadada;
+  width: 30%;
+  border: 1px solid #eeeeee;
 }
-#container #projectDescription {
+#container #Structure #projectInformation {
+  height: 35%;
+  border: 1px solid #eeeeee;
+}
+#container #Structure #projectResource {
+  height: 63%;
+  border: 1px solid #eeeeee;
+}
+#container #Description {
   height: 100%;
   float: left;
-  width: 59%;
+  width: 68%;
   border: 1px solid #dadada;
-}
-.datepicker {
-  z-index: 1151 !important;
 }
 .startProjectModalBody {
   width: 500px;
@@ -130,4 +140,7 @@
 }
 .selectRadio {
   left: 10%;
+}
+.datepicker {
+  z-index: 1151 !important;
 }
