@@ -15,40 +15,40 @@ var menubar ={
     	});
 
     	//添加菜单栏中的文件下拉菜单
-    	var fileli = this.fileDropDown();
-    	navul.append(fileli); 
+    	var fileliDropDown = fileli.initialize();
+    	navul.append(fileliDropDown); 
 
     	//添加菜单栏中编辑下拉菜单
-    	var editli = this.editDropDown();
-    	navul.append(editli); 
+    	var editliDropDown = editli.initialize();
+    	navul.append(editliDropDown); 
 
     	//添加菜单栏中项目下拉菜单
-    	var projectli = this.projectDropDown();
-    	navul.append(projectli); 
+    	var projectliDropDown = projectli.initialize();
+    	navul.append(projectliDropDown); 
 
     	//添加菜单栏中视图下拉菜单
-    	var viewli = this.viewDropDown();
-    	navul.append(viewli); 
+    	var viewliDropDown = viewli.initialize();
+    	navul.append(viewliDropDown); 
 
     	//添加菜单栏中脚本下拉菜单
-    	var scriptli = this.scriptDropDown();
-    	navul.append(scriptli); 
+    	var scriptliDropDown = scriptli.initialize();
+    	navul.append(scriptliDropDown); 
 
     	//添加菜单栏中场景及运行结果下拉菜单
-    	var sceneResultli = this.sceneResultDropDown();
-    	navul.append(sceneResultli); 
+    	var sceneResultliDropDown = sceneResultli.initialize();
+    	navul.append(sceneResultliDropDown); 
 
     	//添加菜单栏中报告下拉菜单
-    	var reportli = this.reportDropDown();
-    	navul.append(reportli); 
+    	var reportliDropDown = reportli.initialize();
+    	navul.append(reportliDropDown); 
 
     	//添加菜单栏中配置管理下拉菜单
-    	var configManagementli = this.configManagementDropDown();
-    	navul.append(configManagementli); 
+    	var configManagementliDropDown = configManagementli.initialize();
+    	navul.append(configManagementliDropDown); 
 
     	//添加菜单栏中帮助下拉菜单
-    	var helpli = this.helpDropDown();
-    	navul.append(helpli); 
+    	var helpliDropDown = helpli.initialize();
+    	navul.append(helpliDropDown); 
 
     	navbar.append(navul);
     	nav.append(navbar);
@@ -740,7 +740,7 @@ var menubar ={
     },	
 
     createProjectonClick:function(){
-       window.alert('createProjectonClick!');
+       newProjectModal.initialize();
     },
     createScriptClick:function(){
         window.alert('createScriptClick!');

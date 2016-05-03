@@ -1,8 +1,13 @@
 var newProjectModal = {
 	initialize:function() {
-		var projectModal = this.projectModal();
-		$('#container').append(projectModal);
-		$("#newprojectModal").modal("show");
+		if($('#newProjectModal').length>0){
+			$("#newprojectModal").modal("show");
+		}
+		else{
+			var projectModal = this.projectModal();
+			$('#container').append(projectModal);
+			$("#newprojectModal").modal("show");
+		}
 	},
 	//创建modal的主要部分
 	projectModal:function(){
@@ -205,6 +210,7 @@ var newProjectModal = {
 			$('#newprojectModal').remove();
 		});
 	},
+
 	//这是用来产生时间的控件
 	buddleDataTimePicker:function(){
 		$('#selectDateButton').datepicker().on('changeDate',function(ev) {
