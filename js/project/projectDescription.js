@@ -1,6 +1,11 @@
 //用来产生显示项目的主要内容信息。
 var projectDescription = {
 	initialize:function(){
+		//首先删除以前存在的div
+		$('#projectInformationFun').remove();
+		$('#projectResourceFun').remove();
+		$('#projectDetails').remove();
+		
 		var projectDetails = this.projectDetails();
 		$('#Description').append(projectDetails);
 

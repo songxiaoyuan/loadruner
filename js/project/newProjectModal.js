@@ -1,16 +1,16 @@
 var newProjectModal = {
-	initialize:function() {
+	initialize:function(option_){
 		if($('#newProjectModal').length>0){
 			$("#newprojectModal").modal("show");
 		}
 		else{
-			var projectModal = this.projectModal();
+			var projectModal = this.projectModal(option_);
 			$('#container').append(projectModal);
 			$("#newprojectModal").modal("show");
 		}
 	},
 	//创建modal的主要部分
-	projectModal:function(){
+	projectModal:function(option_){
 		var newprojectModal = $('<div>',{
 			'class':'modal',
 			'id':'newprojectModal'
@@ -21,9 +21,16 @@ var newProjectModal = {
 		var modalContent = $('<div>',{
 			'class':'modal-content'
 		});
-		var modalHeader = this.projectModalHeader();
-		var modalBody = this.projectModalBody();
-		var ModalFooter = this.projectModalFooter();
+		if(option_){ //此处表示是从文件点击创建项目时产生的modal，只有创建和从已有项目中创建两项。
+			var modalHeader = this.projectModalHeader1();
+			var modalBody = this.projectModalBody1();
+			var ModalFooter = this.projectModalFooter1();
+		}
+		else{
+			var modalHeader = this.projectModalHeader();
+			var modalBody = this.projectModalBody();
+			var ModalFooter = this.projectModalFooter();
+		}
 
 		modalContent.append(modalHeader);
 		modalContent.append(modalBody);
@@ -37,8 +44,12 @@ var newProjectModal = {
 	projectModalHeader:function(){
 		var modalHeader = $('<div>',{
 			'class':'modal-header',
-			'id':'projectModalHeader'
+			'id':'projectModalHeader',
 		});
+		var modalHeaderCreate = $('<div>',{
+			'id':'projectModalHeaderCreate',
+		});
+		modalHeader.append(modalHeaderCreate);
 		return modalHeader;
 	},
 	projectModalBody:function(){
@@ -57,6 +68,9 @@ var newProjectModal = {
 			'class':'projectModalFooter modal-footer',
 			'id':'projectModalFooter'
 		});
+		var modalFooterCreate = $('<div>',{
+			'id':'modalFooterCreate'
+		});
 		var closeButton = $('<button>',{
 			'class':'btn btn-default',
 			'data-dismiss':'modal',
@@ -65,7 +79,79 @@ var newProjectModal = {
 			'text':'退出'     //注意，关闭之后就要把这个整体的model在container中删除
 		});
 
-		modalFooter.append(closeButton);
+		modalFooterCreate.append(closeButton);
+		modalFooter.append(modalFooterCreate);
+		return modalFooter;
+	},
+
+	projectModalHeader1:function(){
+		var modalHeader = $('<div>',{
+			'class':'modal-header',
+			'id':'projectModalHeader'	
+		});
+		var modalHeaderCreate = $('<div>',{
+			'id':'projectModalHeaderCreate',
+			'text':'创建新项目'
+		});
+		modalHeader.append(modalHeaderCreate);
+		return modalHeader;
+	},
+	projectModalBody1:function(){
+		var modalBody = $('<div>',{
+			'class':'modal-body',
+			'id':'projectModalBody'
+		});
+		//注意，在里面添加具体内容，还是要加入div来添加
+		var startProjectModalBody = $('<div>',{
+			'class':'startProjectModalBody',
+			'id':'startProjectModalBody'
+		});
+		
+		var creatNewProject = $('<div>',{
+			'class':'creatNewProject'
+		});
+		var creatProjectInput = '<input type="radio" name="optionsRadios" value="1" checked="true">创建新项目</input>'
+
+		var creatNewProjectFromExisted = $('<div>',{
+			'class':'creatNewProjectFromExisted'
+		});
+		var creatNewProjectFromExistedInput = '<input type="radio" name="optionsRadios" value="2">从已有项目中创建</input>'
+
+
+		creatNewProject.append(creatProjectInput);
+		creatNewProjectFromExisted.append(creatNewProjectFromExistedInput);
+		startProjectModalBody.append(creatNewProject);
+		startProjectModalBody.append(creatNewProjectFromExisted);
+		modalBody.append(startProjectModalBody);
+
+		return modalBody;
+	},
+	projectModalFooter1:function(){
+		var modalFooter = $('<div>',{
+			'class':'projectModalFooter modal-footer',
+			'id':'projectModalFooter'
+		});
+		var modalFooterCreate = $('<div>',{
+			'class':'modalFooterCreate',
+			'id':'modalFooterCreate'
+		});
+		var nextButton = $('<button>',{
+			'class':'btn btn-default',
+			'id':'newProjectModalFooter1nextButton',
+			'onclick':'newProjectModal.newProjectModalFooter1nextButtonOnClick()',
+			'text':'下一步'     //注意，关闭之后就要把这个整体的model在container中删除
+		});
+		var closeButton = $('<button>',{
+			'class':'btn btn-default',
+			'data-dismiss':'modal',
+			'id':'newProjectModalFooter1closeButton',
+			'onclick':'newProjectModal.removeNewprojectModal()',
+			'text':'退出'     //注意，关闭之后就要把这个整体的model在container中删除
+		});
+
+		modalFooterCreate.append(nextButton)
+		modalFooterCreate.append(closeButton);
+		modalFooter.append(modalFooterCreate);
 		return modalFooter;
 	},
 
@@ -75,7 +161,7 @@ var newProjectModal = {
 			'class':'startProjectModalBody',
 			'id':'startProjectModalBody'
 		});
-		currentOpenProject =  this.currentOpenProjectBody();
+		
 		var creatNewProject = $('<div>',{
 			'class':'creatNewProject'
 		});
@@ -100,7 +186,8 @@ var newProjectModal = {
 		creatNewProject.append(creatProjectButton);
 		creatNewProject.append(creatProjectFromExistedButton);
 
-		ret.append(currentOpenProject);
+		currentOpenProject =  this.currentOpenProjectBody();
+	    ret.append(currentOpenProject);
 		ret.append(creatNewProject);
 		return ret;
 	},
@@ -157,8 +244,9 @@ var newProjectModal = {
 	createProjectButtonOnClick:function(){
 
 		//隐藏以前div，
+		$('#projectModalHeaderCreate').hide();
 		$('#startProjectModalBody').hide();
-		$('#projectModalFooterQuit').hide();
+		$('#modalFooterCreate').hide();
 
 		//添加显示现在div 如果有，表示是点击过上一步，直接显示就可以了
 		if($('#createProjectModalBody').length>0){
@@ -184,8 +272,9 @@ var newProjectModal = {
 		//TODO:
 
 		//隐藏以前div，
+		$('#projectModalHeaderCreate').hide();
 		$('#startProjectModalBody').hide();
-		$('#projectModalFooterQuit').hide();
+		$('#modalFooterCreate').hide();
 
 		//添加显示现在div 如果有，表示是点击过上一步，直接显示就可以了
 		if($('#creatProjectFromExistedBody1').length>0){
@@ -218,6 +307,18 @@ var newProjectModal = {
 		  $('#selectDate')[0].value=selectDate;
 		  $('#selectDateButton').datepicker('hide');
 		});
+	},
+
+	newProjectModalFooter1nextButtonOnClick:function(){
+		var selectProject = $('#startProjectModalBody input:radio:checked').val();
+		if (selectProject=='1') {
+		   //是点击的创建新项目
+		   newProjectModal.createProjectButtonOnClick();
+		}
+		else{
+			//是点击的从已有项目中创建。
+			newProjectModal.creatProjectFromExistedButtonOnClick()
+		}
 	},
 
 }
