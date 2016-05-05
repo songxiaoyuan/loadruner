@@ -96,37 +96,64 @@ var projectDescription = {
 			'text':'项目资源'
 		});
 		var projectResourceContent = $('<div>',{
-			'class':'projectDetailsContent'
+			'class':'projectResourceContent',
+			'id':'projectResourceContent'
 		});
 
-		var projectScript = $('<div>',{
-			'text':'脚本'
-		});
-		var projectScript1 = $('<div>',{
-			'text':'脚本1'
-		});
-		var projectScript2 = $('<div>',{
-			'text':'脚本2'
-		});
-		var projectScript3 = $('<div>',{
-			'text':'脚本3'
-		});
+		var projectResourceData = [
+			{
+			  text: '脚本',
+			  nodes: [
+			    {
+			       text: '脚本1'
+			    },
+			    {
+			       text: '脚本2'
+			    },
+			    {
+			       text: '脚本3'
+			    }
+			  ]
+			},
+			{
+			  text: '场景及运行结果',
+			  nodes:[
+			  	{
+			  	   text: '场景1',
+			  	   nodes:[
+			  	     {
+			  	        text: '结果1'
+			  	     },
+			  	     {
+			  	        text: '结果2'
+			  	     },
+			  	     {
+			  	        text: '结果3'
+			  	     }
+			  	   ]
+			  	}
+			  ]
+			},
+			{
+			  text: '报告',
+			  nodes:[
+			    {
+			       text: '结果报告1'
+			    },
+			    {
+			       text: '结果报告2'
+			    },
+			    {
+			       text: '测试报告1'
+			    }
+			  ]
+			}
+		];
 
-		projectScript.append(projectScript1);
-		projectScript.append(projectScript2);
-		projectScript.append(projectScript3);
-
-		var projectSceneResult = $('<div>',{
-			'text':'场景及运行结果'
+		projectResourceContent.treeview({
+		  showBorder: false,
+		  data: projectResourceData
 		});
-
-		var projectReport = $('<div>',{
-			'text':'报告'
-		});
-
-		projectResourceContent.append(projectScript);
-		projectResourceContent.append(projectSceneResult);
-		projectResourceContent.append(projectReport);
 
 
 		ret.append(projectResourceHeader);
