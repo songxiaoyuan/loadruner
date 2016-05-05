@@ -97,6 +97,19 @@ var projectDescription = {
 		var projectScript = $('<div>',{
 			'text':'脚本'
 		});
+		var projectScript1 = $('<div>',{
+			'text':'脚本1'
+		});
+		var projectScript2 = $('<div>',{
+			'text':'脚本2'
+		});
+		var projectScript3 = $('<div>',{
+			'text':'脚本3'
+		});
+
+		projectScript.append(projectScript1);
+		projectScript.append(projectScript2);
+		projectScript.append(projectScript3);
 
 		var projectSceneResult = $('<div>',{
 			'text':'场景及运行结果'
