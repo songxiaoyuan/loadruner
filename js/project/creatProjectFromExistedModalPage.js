@@ -206,8 +206,9 @@ var creatProjectFromExistedModalPage = {
 		$('#creatProjectFromExistedHeader').hide();
 		$('#creatProjectFromExistedFooter1').hide();
 
+		$('#projectModalHeaderCreate').show();
 		$('#startProjectModalBody').show();
-		$('#projectModalFooterQuit').show();
+		$('#modalFooterCreate').show();
 	},
 
 	//点击第一个页面，下一步的操作

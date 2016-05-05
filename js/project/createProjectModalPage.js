@@ -150,12 +150,13 @@ var createProjectModalPage={
 	creatProjectModalFooterBackOnClick:function(){
 		//处理head部分
 		$('#createProjectModalHeader').hide();
+		$('#projectModalHeaderCreate').show();
 		//处理body部分
 		$('#createProjectModalBody').hide();
 		$('#startProjectModalBody').show();
 		//处理footer部分.
 		$('#creatProjectModalFooter').hide();
-		$('#projectModalFooterQuit').show();
+		$('#modalFooterCreate').show();
 	},
 	//creatProjectModalFooterConfirm按钮click时的操作。保存一些路径信息，删除整个modal，然后显示整个背景项目等div！！
 	creatProjectModalFooterConfirmOnClick:function(){

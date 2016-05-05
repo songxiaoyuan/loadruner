@@ -119,7 +119,7 @@ var fileli ={
     	return newli;
     },	
     createProjectonClick:function(){
-       newProjectModal.initialize();
+       newProjectModal.initialize('create');
     },
     createScriptClick:function(){
         window.alert('createScriptClick!');
