@@ -122,7 +122,7 @@ var fileli ={
        newProjectModal.initialize('create');
     },
     createScriptClick:function(){
-        window.alert('createScriptClick!');
+        scriptMain.createScriptModal();
     },
     createSceneClick:function(){
         window.alert('createSceneClick!');

@@ -144,3 +144,14 @@ body {
 .datepicker {
   z-index: 1151 !important;
 }
+#createScriptModalBody {
+  width: 500px;
+  height: 380px;
+}
+#createScriptModalBody .createScriptModalBody1SelectProtocol {
+  width: 300px;
+  height: 280px;
+}
+.selectRadio {
+  left: 10%;
+}
