@@ -190,19 +190,29 @@ var createScriptModal = {
 
 		var saveSnapShootDiv = $('<div>',{
 		});
-		var saveSnapShootInput = '<input type="radio">保存页面快照</input>';
+		var saveSnapShootInput = '<input type="checkbox">保存页面快照</input>';
 		saveSnapShootDiv.append(saveSnapShootInput);
 
 		var characterSupportDiv = $('<div>',{
 		});
-		var characterSupportInput = '<input type="radio" checked="true">字符支持</input>';
+		var characterSupportInput = '<input type="checkbox" checked="true">字符支持</input>';
+		var characterSupport1Div = $('<div>',{
+		});
+		var characterSupport2Div = $('<div>',{
+		});
+		var characterSupport3Div = $('<div>',{
+		});
 		var characterSupport1 = '<input type="radio" name="characterSupport" value="UTF-8" checked="true">UTF-8</input>';
 		var characterSupport2 = '<input type="radio" name="characterSupport" value="GBK">GBK</input>';
 		var characterSupport3 = '<input type="radio" name="characterSupport" value="GB18030">GB18030</input>';
+		characterSupport1Div.append(characterSupport1);
+		characterSupport2Div.append(characterSupport2);
+		characterSupport3Div.append(characterSupport3);
+
 		characterSupportDiv.append(characterSupportInput);
-		characterSupportDiv.append(characterSupport1);
-		characterSupportDiv.append(characterSupport2);
-		characterSupportDiv.append(characterSupport3);
+		characterSupportDiv.append(characterSupport1Div);
+		characterSupportDiv.append(characterSupport2Div);
+		characterSupportDiv.append(characterSupport3Div);
 
 		ret.append(selectBrowserDiv);
 		ret.append(URLPathDiv);
@@ -280,7 +290,7 @@ var createScriptModal = {
 
 	createScriptModalFooter2startRecordButtonOnClick:function(){
 
-		//TODO:首先开始的是进入录制的界面，然后有开发浏览器，输入URL
+		//TODO:首先开始的是进入录制的界面，应该有一个悬浮窗口，然后有开发浏览器，输入URL
 
 		//最后取消现在的modal.
 		createScriptModal.removeCreateScriptModal();
