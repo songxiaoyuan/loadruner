@@ -292,6 +292,28 @@ var createScriptModal = {
 
 		//TODO:首先开始的是进入录制的界面，应该有一个悬浮窗口，然后有开发浏览器，输入URL
 
+		//TODO：现在因为没有做录屏，所以现在点击之后，先做脚本的展示工作，即，点击之后已经创建了一个脚本。
+
+		//首先更新数据，然后删除以前div，然后生产新的树形div。
+		var scriptInfo = appData.projectResourceData[0];
+		var scriptNodes = scriptInfo.nodes;
+		var scriptNode = {};
+		var len = scriptNodes.length;
+		scriptNode.text='脚本'+(len+1).toString();
+		scriptNodes[len] = scriptNode;
+		scriptInfo.nodes=scriptNodes;
+		appData.projectResourceData[0] = scriptInfo;
+
+		$('#projectResourceContent').empty();
+		$('#projectResourceContent').treeview({
+		  showBorder: false,
+		  data: appData.projectResourceData,
+		  onNodeSelected: function(event, node) {
+		    window.alert(node.class);
+		  },
+		});
+
+
 		//最后取消现在的modal.
 		createScriptModal.removeCreateScriptModal();
 

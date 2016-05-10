@@ -100,55 +100,7 @@ var projectDescription = {
 			'id':'projectResourceContent'
 		});
 
-		var projectResourceData = [
-			{
-			  text: '脚本',
-			  nodes: [
-			    {
-			       text: '脚本1'
-			    },
-			    {
-			       text: '脚本2'
-			    },
-			    {
-			       text: '脚本3'
-			    }
-			  ]
-			},
-			{
-			  text: '场景及运行结果',
-			  nodes:[
-			  	{
-			  	   text: '场景1',
-			  	   nodes:[
-			  	     {
-			  	        text: '结果1'
-			  	     },
-			  	     {
-			  	        text: '结果2'
-			  	     },
-			  	     {
-			  	        text: '结果3'
-			  	     }
-			  	   ]
-			  	}
-			  ]
-			},
-			{
-			  text: '报告',
-			  nodes:[
-			    {
-			       text: '结果报告1'
-			    },
-			    {
-			       text: '结果报告2'
-			    },
-			    {
-			       text: '测试报告1'
-			    }
-			  ]
-			}
-		];
+		var projectResourceData = appData.projectResourceData;
 
 		projectResourceContent.treeview({
 		  showBorder: false,
