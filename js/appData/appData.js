@@ -5,17 +5,19 @@ var appData={
 	projectResourceData:[
 		{
 		  text: '脚本',
-		  class:'script',
+		  class:'parent',
 		  nodes: [
 		  ]
 		},
 		{
 		  text: '场景及运行结果',
+		  class:'parent',
 		  nodes:[
 		  ]
 		},
 		{
 		  text: '报告',
+		  class:'parent',
 		  nodes:[
 		  ]
 		}

@@ -300,6 +300,13 @@ var createScriptModal = {
 		var scriptNode = {};
 		var len = scriptNodes.length;
 		scriptNode.text='脚本'+(len+1).toString();
+		scriptNode.class = 'script';
+		var nodeId = 'scriptId'+(len+1).toString();
+		scriptNode.id=nodeId;
+		var scriptNodeState={
+			addTab:true
+		};
+		scriptNode.state = scriptNodeState;
 		scriptNodes[len] = scriptNode;
 		scriptInfo.nodes=scriptNodes;
 		appData.projectResourceData[0] = scriptInfo;
@@ -309,14 +316,39 @@ var createScriptModal = {
 		  showBorder: false,
 		  data: appData.projectResourceData,
 		  onNodeSelected: function(event, node) {
-		    window.alert(node.class);
+		    switch(node.class){
+		    	case 'parent':
+		    	  //TODO：以后可以用来就是收缩树形结构，现在先不做。
+		    	  break;
+		    	case 'script':
+		    	  //表示点击的是脚本，
+		    	  createScriptModal.scriptNodeOnClick(node);
+		    	  break;
+		    	default:
+		    	  break;
+		    }
 		  },
 		});
+
+		
+
+		//首先自执行一下，就是创建之后，直接显示创建的脚本了。
+		createScriptModal.scriptNodeOnClick(scriptNode);
+		//使得刚创建的node节点处于选择状态，及先click一下。
+		$('#'+nodeId).click();
+
 
 
 		//最后取消现在的modal.
 		createScriptModal.removeCreateScriptModal();
 
+	},
+
+	//点击脚本应该引起的操作。
+	scriptNodeOnClick:function(node){
+		//初始化脚本信息部分的div，然后进行监听。
+		scriptInformation.initialize();
+		$('#scriptTabs').addtabs({monitor:'.projectResourceContent'});
 	},
 
 	//creatProjectModalFooterCancel按钮click时的操作。也就是删除整个modal，这个可以公用。

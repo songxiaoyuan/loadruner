@@ -520,6 +520,12 @@
 				.attr('data-nodeid', node.nodeId)
 				.attr('style', _this.buildStyleOverride(node));
 
+			    //TODO:为了使得能够点击生产tab，所以需要添加data-addtab属性！！
+				if(node.state.addTab){
+					treeItem.attr('data-addtab', node.nodeId);
+					treeItem.attr('id', node.id);
+				}
+
 			// Add indent/spacer to mimic tree structure
 			for (var i = 0; i < (level - 1); i++) {
 				treeItem.append(_this.template.indent);

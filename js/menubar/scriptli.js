@@ -24,7 +24,8 @@ var scriptli ={
     	var startRecordli = $('<li>');
     	var startRecorda = $('<a>',{
     		'href':'#',
-    		'text':'开始录制'
+    		'text':'开始录制',
+            'onclick':'scriptli.startRecordaOnClick()'
     	});
     	startRecordli.append(startRecorda);
     	var playBackli = $('<li>');
@@ -97,5 +98,10 @@ var scriptli ={
     	scriptli.append(scriptul);
 
     	return scriptli;
-    },	
+    },
+
+    startRecordaOnClick:function(){
+        //此函数就是用来创建一个新的脚本。
+        scriptMain.createScriptModal();
+    }
 }

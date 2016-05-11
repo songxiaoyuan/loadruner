@@ -33,6 +33,7 @@ var projectDescription = {
 		});
 
 		var projectName = $('<div>',{
+			'onclick':'projectDescription.projectNameOnClick()'
 		});
 
 		var projectNameLabel = $('<div>',{
@@ -284,6 +285,14 @@ var projectDescription = {
 		ret.append(projectDetailsContent);
 		ret.append(projectDetailsFooter);
 		return ret;
+	},
+
+	projectNameOnClick:function(){
+		$('#Description > div').hide();
+		console.log('hideeeeeeeeeeeeeeeee');
+		$('#projectDetails').show();
+		console.log('shouwwwwwwwwwwwwwwwwww');
+		
 	},
 
 	projectDetailsSaveButtonOnClick:function(){
