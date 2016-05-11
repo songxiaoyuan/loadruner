@@ -2,6 +2,7 @@
 var projectDescription = {
 	initialize:function(){
 		//首先删除以前存在的div
+		//TODO:如果需要提示保存现有信息，我觉得应该保存现有项目的信息。
 		$('#projectInformationFun').remove();
 		$('#projectResourceFun').remove();
 		$('#projectDetails').remove();
@@ -197,7 +198,7 @@ var projectDescription = {
 			'text':'创建日期'
 		});
 		var projectCreateDateInput = $('<input>',{
-			'id':'selectDate',
+			'id':'projectDetailsSelectDate',
 			'type':'text',
 		});
 		projectCreateDate.append(projectCreateDateLabel);
