@@ -360,8 +360,7 @@ var scriptInformation={
 		return ret;
 	},
 
-	//次函数是用来产生在脚本中脚本tab的主要内容，传入的是脚本节点id，因为，在脚本中，初始化，事件和结束的部分，右边tab的内容个一样。
-	//所以在这里用一个函数来生成，主要的任务就是对应div的id一定要区分清楚！！
+	//次函数是用来产生在脚本初始化tab页面中脚本tab的主要内容，传入的是脚本节点id，
 	createScriptInitializeTabsContentScriptTabContent:function(scriptNodeId){
 		var ret = $('<div>',{
 			'class':'scriptTab2Content tab-pane fade in active',
@@ -378,10 +377,56 @@ var scriptInformation={
 	createScriptInitializeTabsContentRequestTabContent:function(scriptNodeId){
 		var ret = $('<div>',{
 			'class':'scriptTab2Content tab-pane fade',
-			'id':'ScriptInitializeTabsContentRequestTabContentDiv'+scriptNodeId,
-			'text':'test'
+			'id':'ScriptInitializeTabsContentRequestTabContentDiv'+scriptNodeId
 		});
+
+		var requestTabContent = scriptInformation.createScriptRequestTabContent();
+		ret.append(requestTabContent);
 		
+		return ret;
+	},
+    
+    //此函数主要是用来产生点击请求时产生的div，因为页面太复杂，而且会有重用。所以单独提出出来。
+	createScriptRequestTabContent:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'scriptTab2RequestContent',
+		});
+		var requestTabContentLeft = $('<div>',{
+			'class':'requestTabContentLeft'
+		});
+		var requestTabContentLeftHead = $('<div>',{
+			'class':'requestTabContentLeftHead',
+			'text':'页面快照'
+		});
+		var requestTabContentLeftTextarea = $('<Textarea>',{
+			'class':'requestTabContentLeftTextarea',
+			'text':'this is the requestTabContent'
+		});
+		requestTabContentLeft.append(requestTabContentLeftHead);
+		requestTabContentLeft.append(requestTabContentLeftTextarea);
+
+		var requestTabContentRight = $('<div>',{
+			'class':'requestTabContentRight',
+		});
+		var requestTabContentRightHead = $('<div>',{
+			'class':'requestTabContentRightHead',
+			'text':'发送请求及接受数据'
+		});
+		var requestTabContentRightTable = $('<table>',{
+			'class':'requestTabContentRightTable',
+			'border':'1',
+			'cellspacing':'0'
+
+		});
+		var tableHeadTr = $('<tr>',{
+
+		});
+
+		requestTabContentRight.append(requestTabContentRightHead);
+		requestTabContentRight.append(requestTabContentRightTable);
+		
+		ret.append(requestTabContentLeft);
+		ret.append(requestTabContentRight);
 		return ret;
 	},
 
