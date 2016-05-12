@@ -158,3 +158,74 @@ body {
 .buttonInLine {
   float: left;
 }
+.createScriptInformationDeatilsDiv {
+  width: 100%;
+  height: 920px;
+}
+.ScriptTabsContentDiv {
+  width: 100%;
+  height: 70%;
+  border: 1px solid #eeeeee;
+}
+.ScriptTabsContentDiv .ScriptTabsContentDivLeft {
+  width: 15%;
+  height: 100%;
+  float: left;
+  border: 1px solid #eeeeee;
+}
+.ScriptTabsContentDiv .ScriptTabsContentDivRight {
+  width: 79%;
+  height: 100%;
+  float: left;
+  border: 1px solid #eeeeee;
+}
+.ScriptTabsContentDiv .ScriptTabsContentDivRight .ScriptTabsContentTabContent {
+  height: 100%;
+  width: 100%;
+}
+.ScriptTabsContentDiv .ScriptTabsContentDivRight .ScriptTabsContentTabContent .scriptTabsContentDivTab {
+  padding-left: 0;
+  margin: 9px 0;
+  margin-bottom: 0;
+  list-style: none;
+  height: 45px;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+.ScriptTabsContentDiv .ScriptTabsContentDivRight .ScriptTabsContentTabContent .scriptTabsContentDivTab li {
+  position: relative;
+  display: block;
+  float: left;
+  margin-bottom: -1px;
+}
+.ScriptTabsContentDiv .ScriptTabsContentDivRight .ScriptTabsContentTabContent .scriptTabsContentDivTab a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.ScriptTabsContentDiv .ScriptTabsContentDivRight .ScriptTabsContentTabContent .scriptTabsContentDivSecondTabContent {
+  height: 90%;
+  width: 100%;
+}
+.ScriptTabsContentDiv .ScriptTabsContentDivRight .ScriptTabsContentTabContent .scriptTabsContentDivSecondTabContent .scriptTab2Content {
+  height: 100%;
+  width: 100%;
+}
+.ScriptTabsContentDiv .ScriptTabsContentDivRight .ScriptTabsContentTabContent .scriptTabsContentDivSecondTabContent .scriptTab2Content .scriptTextarea {
+  width: 100%;
+  height: 100%;
+}
+.logText {
+  width: 100%;
+  height: 5%;
+  border: 1px solid #eeeeee;
+}
+.logDetails {
+  width: 100%;
+  height: 25%;
+  border: 1px solid #eeeeee;
+}

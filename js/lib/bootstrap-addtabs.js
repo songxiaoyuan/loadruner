@@ -87,11 +87,9 @@ window.Addtabs = {
 
             //是否指定TAB内容
             if (opts.content) {
-                var testdiv = $('<div>',{
-                    'class':'test',
-                    'text':'123'
-                });
-                content.append(testdiv);
+                //TODO在此添加具体的脚本信息的具体信息。opts.content就是脚本节点的id。
+                var scriptInformationDeatils = scriptInformation.createScriptInformationDeatilsDiv(opts.content);
+                content.append(scriptInformationDeatils);
                 // content.append(opts.content);
             } else if (Addtabs.options.iframeUse && !opts.ajax) {//没有内容，使用IFRAME打开链接
                 content.append(

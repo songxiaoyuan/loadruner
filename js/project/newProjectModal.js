@@ -9,9 +9,9 @@ var newProjectModal = {
 			$("#newprojectModal").modal("show");			
 		}
 
-		// //TODO:快速进入脚本页面,不用了之后要删去。
-		// $('#creatProjectButton').click();
-		// $('#creatProjectModalFooterConfirm').click();
+		//TODO:快速进入脚本页面,不用了之后要删去。
+		$('#creatProjectButton').click();
+		$('#creatProjectModalFooterConfirm').click();
 	},
 	//创建modal的主要部分
 	projectModal:function(option_){

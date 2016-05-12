@@ -524,6 +524,7 @@
 				if(node.state.addTab){
 					treeItem.attr('data-addtab', node.nodeId);
 					treeItem.attr('id', node.id);
+					treeItem.attr('content', node.id);
 				}
 
 			// Add indent/spacer to mimic tree structure

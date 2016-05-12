@@ -3,7 +3,6 @@ var scriptInformation={
 	initialize:function(){
 		//首先隐藏以前的project等div。
 		if($('#scriptInformationDiv').length ==0){
-			console.log('nooooooooooooooooooooo');
 			$('#Description > div').hide();
 			var scriptInformationDiv = $('<div>',{
 				'id':'scriptInformationDiv'
@@ -231,6 +230,258 @@ var scriptInformation={
 		scriptTabs.append(scriptTabsContent);
 
 		ret.append(scriptTabs);
+		return ret;
+	},
+
+	//此函数是用来产生脚本具体细节的div，包括初始化，事件，结果等信息，传入的是脚本节点的id。不同的脚本会创建不同的div.此函数是由addtab插件调用的。
+	createScriptInformationDeatilsDiv:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'createScriptInformationDeatilsDiv'
+		});
+		var scriptTabsContent = scriptInformation.createScriptTabsContentDiv(scriptNodeId);
+		var logText = $('<div>',{
+			'class':'logText',
+			'text':'日志'
+		});
+		var logDetails = $('<textarea>',{
+			'class':'logDetails'
+		});
+
+		ret.append(scriptTabsContent);
+		ret.append(logText);
+		ret.append(logDetails);
+		return ret;
+	},
+
+    //此函数是用来产生每一个脚本对应的tab页面主要是左边的部分，传入的参数是脚本节点的ID。
+	createScriptTabsContentDiv:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'ScriptTabsContentDiv'
+		});
+		var ScriptTabsContentDivLeft = $('<div>',{
+			'class':'ScriptTabsContentDivLeft'
+		});
+		var ScriptTabsContentDivRight = $('<div>',{
+			'class':'ScriptTabsContentDivRight tab-content'
+		});
+		var ScriptInitializeTabsContentDiv = scriptInformation.createScriptInitializeTabsContentDiv(scriptNodeId);
+		var ScriptThingTabsContentDiv = scriptInformation.createScriptThingTabsContentDiv(scriptNodeId);
+		var ScriptEndTabsContentDiv = scriptInformation.createScriptEndTabsContentDiv(scriptNodeId);
+
+		ScriptTabsContentDivRight.append(ScriptInitializeTabsContentDiv);
+		ScriptTabsContentDivRight.append(ScriptThingTabsContentDiv);
+		ScriptTabsContentDivRight.append(ScriptEndTabsContentDiv);
+
+		var scriptTabsContentUl = $('<ul>',{
+		});
+
+		var scriptInitializeli = $('<li>',{
+		});
+		var scriptInitializea = $('<a>',{
+			'href':'#ScriptInitializeTabsContentDiv'+scriptNodeId,
+			'data-toggle':'tab',
+			'text':'初始化'
+		});
+		scriptInitializeli.append(scriptInitializea);
+
+		var scriptThingli = $('<li>',{
+		});
+		var scriptThinga = $('<a>',{
+			'href':'#ScriptThingTabsContentDiv'+scriptNodeId,
+			'data-toggle':'tab',
+			'text':'事件'
+		});
+		scriptThingli.append(scriptThinga);
+
+		var  scriptEndli = $('<li>',{
+		});
+		var scriptEnda = $('<a>',{
+			'href':'#ScriptEndTabsContentDiv'+scriptNodeId,
+			'data-toggle':'tab',
+			'text':'结束'
+		});
+		scriptEndli.append(scriptEnda);
+
+		scriptTabsContentUl.append(scriptInitializeli);
+		scriptTabsContentUl.append(scriptThingli);
+		scriptTabsContentUl.append(scriptEndli);
+		ScriptTabsContentDivLeft.append(scriptTabsContentUl);
+
+
+		ret.append(ScriptTabsContentDivLeft);
+		ret.append(ScriptTabsContentDivRight);
+		return ret;
+	},
+
+	//此函数是用来产生每一个脚本对应的tab页面右边的点击初始化的内容，传入的参数是脚本节点的ID。
+	createScriptInitializeTabsContentDiv:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'ScriptTabsContentTabContent tab-pane fade in active',
+			'id':'ScriptInitializeTabsContentDiv'+scriptNodeId,
+		});
+
+		var scriptInitializeTabsContentDivUl = $('<ul>',{
+			'class':'scriptTabsContentDivTab'
+		});
+		var scriptInitializeTabsContentScriptli = $('<li>',{
+			'class':'scriptTabsContentli'
+		});
+		var scriptInitializeTabsContentScripta = $('<a>',{
+			'href':'#ScriptInitializeTabsContentScriptTabContentDiv'+scriptNodeId,
+			'data-toggle':'tab',
+			'text':'脚本'
+		});
+		scriptInitializeTabsContentScriptli.append(scriptInitializeTabsContentScripta);
+
+		var  scriptInitializeTabsContentRequestli = $('<li>',{
+			'class':'scriptTabsContentli'
+		});
+		var scriptInitializeTabsContentRequesta = $('<a>',{
+			'href':'#ScriptInitializeTabsContentRequestTabContentDiv'+scriptNodeId,
+			'data-toggle':'tab',
+			'text':'请求'
+		});
+		scriptInitializeTabsContentRequestli.append(scriptInitializeTabsContentRequesta);
+
+		scriptInitializeTabsContentDivUl.append(scriptInitializeTabsContentScriptli);
+		scriptInitializeTabsContentDivUl.append(scriptInitializeTabsContentRequestli);
+
+
+		var scriptInitializeTabsContentDivTabContent = $('<div>',{
+			'class':'scriptTabsContentDivSecondTabContent tab-content'
+		});
+		var ScriptInitializeTabsContentScriptTabContentDiv = scriptInformation.createScriptInitializeTabsContentScriptTabContent(scriptNodeId);
+		var ScriptInitializeTabsContentRequestTabContentDiv = scriptInformation.createScriptInitializeTabsContentRequestTabContent(scriptNodeId);
+		scriptInitializeTabsContentDivTabContent.append(ScriptInitializeTabsContentScriptTabContentDiv);
+		scriptInitializeTabsContentDivTabContent.append(ScriptInitializeTabsContentRequestTabContentDiv);
+
+		ret.append(scriptInitializeTabsContentDivUl);
+		ret.append(scriptInitializeTabsContentDivTabContent);
+		return ret;
+	},
+
+	//次函数是用来产生在脚本中脚本tab的主要内容，传入的是脚本节点id，因为，在脚本中，初始化，事件和结束的部分，右边tab的内容个一样。
+	//所以在这里用一个函数来生成，主要的任务就是对应div的id一定要区分清楚！！
+	createScriptInitializeTabsContentScriptTabContent:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'scriptTab2Content tab-pane fade in active',
+			'id':'ScriptInitializeTabsContentScriptTabContentDiv'+scriptNodeId,
+		});
+		var scriptTextarea = $('<textarea>',{
+			'class':'scriptTextarea',
+			'text':'this is script tab content'
+		});
+		ret.append(scriptTextarea);
+		return ret;
+	},
+
+	createScriptInitializeTabsContentRequestTabContent:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'scriptTab2Content tab-pane fade',
+			'id':'ScriptInitializeTabsContentRequestTabContentDiv'+scriptNodeId,
+			'text':'test'
+		});
+		
+		return ret;
+	},
+
+	//此函数是用来产生每一个脚本对应的tab页面右边的点击事件的内容，传入的参数是脚本节点的ID。
+	createScriptThingTabsContentDiv:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'ScriptTabsContentTabContent tab-pane fade',
+			'id':'ScriptThingTabsContentDiv'+scriptNodeId,
+			'text':'Thing'+scriptNodeId
+		});
+
+		// var scriptTabsContentRightTab = $('<div>',{
+		// 	'class':'scriptTabsContentRightTab'
+		// });
+
+		// var scriptTabsContentRightTabContent = $('<div>',{
+		// });
+		// var scriptInitializea = $('<a>',{
+		// 	'href':'#',
+		// 	'data-toggle':'tab',
+		// 	'text':'初始化'
+		// });
+		// scriptInitializeli.append(scriptInitializea);
+
+		// var scriptThingli = $('<li>',{
+		// });
+		// var scriptThinga = $('<a>',{
+		// 	'href':'#',
+		// 	'data-toggle':'tab',
+		// 	'text':'事件'
+		// });
+		// scriptThingli.append(scriptThinga);
+
+		// var  scriptEndli = $('<li>',{
+		// });
+		// var scriptEnda = $('<a>',{
+		// 	'href':'#',
+		// 	'data-toggle':'tab',
+		// 	'text':'结束'
+		// });
+		// scriptEndli.append(scriptEnda);
+
+		// scriptTabsContentUl.append(scriptInitializeli);
+		// scriptTabsContentUl.append(scriptThingli);
+		// scriptTabsContentUl.append(scriptEndli);
+		// ScriptTabsContentDivLeft.append(scriptTabsContentUl);
+
+
+		// ret.append(ScriptTabsContentDivLeft);
+		// ret.append(ScriptTabsContentDivRight);
+		return ret;
+	},
+
+	//此函数是用来产生每一个脚本对应的tab页面右边的点击结束的内容，传入的参数是脚本节点的ID。
+	createScriptEndTabsContentDiv:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'ScriptTabsContentTabContent tab-pane fade',
+			'id':'ScriptEndTabsContentDiv'+scriptNodeId,
+			'text':'end'+scriptNodeId
+		});
+
+		// var scriptTabsContentRightTab = $('<div>',{
+		// 	'class':'scriptTabsContentRightTab'
+		// });
+
+		// var scriptTabsContentRightTabContent = $('<div>',{
+		// });
+		// var scriptInitializea = $('<a>',{
+		// 	'href':'#',
+		// 	'data-toggle':'tab',
+		// 	'text':'初始化'
+		// });
+		// scriptInitializeli.append(scriptInitializea);
+
+		// var scriptThingli = $('<li>',{
+		// });
+		// var scriptThinga = $('<a>',{
+		// 	'href':'#',
+		// 	'data-toggle':'tab',
+		// 	'text':'事件'
+		// });
+		// scriptThingli.append(scriptThinga);
+
+		// var  scriptEndli = $('<li>',{
+		// });
+		// var scriptEnda = $('<a>',{
+		// 	'href':'#',
+		// 	'data-toggle':'tab',
+		// 	'text':'结束'
+		// });
+		// scriptEndli.append(scriptEnda);
+
+		// scriptTabsContentUl.append(scriptInitializeli);
+		// scriptTabsContentUl.append(scriptThingli);
+		// scriptTabsContentUl.append(scriptEndli);
+		// ScriptTabsContentDivLeft.append(scriptTabsContentUl);
+
+
+		// ret.append(ScriptTabsContentDivLeft);
+		// ret.append(ScriptTabsContentDivRight);
 		return ret;
 	},
 
