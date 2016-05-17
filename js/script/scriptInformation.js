@@ -490,48 +490,71 @@ var scriptInformation={
 		var ret = $('<div>',{
 			'class':'ScriptTabsContentTabContent tab-pane fade',
 			'id':'ScriptThingTabsContentDiv'+scriptNodeId,
-			'text':'Thing'+scriptNodeId
 		});
 
-		// var scriptTabsContentRightTab = $('<div>',{
-		// 	'class':'scriptTabsContentRightTab'
-		// });
+		var scriptThingTabsContentDivUl = $('<ul>',{
+			'class':'scriptTabsContentDivTab'
+		});
+		var scriptThingTabsContentScriptli = $('<li>',{
+			'class':'scriptTabsContentli'
+		});
+		var scriptThingTabsContentScripta = $('<a>',{
+			'href':'#ScriptThingTabsContentScriptTabContentDiv'+scriptNodeId,
+			'data-toggle':'tab',
+			'text':'脚本'
+		});
+		scriptThingTabsContentScriptli.append(scriptThingTabsContentScripta);
 
-		// var scriptTabsContentRightTabContent = $('<div>',{
-		// });
-		// var scriptInitializea = $('<a>',{
-		// 	'href':'#',
-		// 	'data-toggle':'tab',
-		// 	'text':'初始化'
-		// });
-		// scriptInitializeli.append(scriptInitializea);
+		var  scriptThingTabsContentRequestli = $('<li>',{
+			'class':'scriptTabsContentli'
+		});
+		var scriptThingTabsContentRequesta = $('<a>',{
+			'href':'#ScriptThingTabsContentRequestTabContentDiv'+scriptNodeId,
+			'data-toggle':'tab',
+			'text':'请求'
+		});
+		scriptThingTabsContentRequestli.append(scriptThingTabsContentRequesta);
 
-		// var scriptThingli = $('<li>',{
-		// });
-		// var scriptThinga = $('<a>',{
-		// 	'href':'#',
-		// 	'data-toggle':'tab',
-		// 	'text':'事件'
-		// });
-		// scriptThingli.append(scriptThinga);
-
-		// var  scriptEndli = $('<li>',{
-		// });
-		// var scriptEnda = $('<a>',{
-		// 	'href':'#',
-		// 	'data-toggle':'tab',
-		// 	'text':'结束'
-		// });
-		// scriptEndli.append(scriptEnda);
-
-		// scriptTabsContentUl.append(scriptInitializeli);
-		// scriptTabsContentUl.append(scriptThingli);
-		// scriptTabsContentUl.append(scriptEndli);
-		// ScriptTabsContentDivLeft.append(scriptTabsContentUl);
+		scriptThingTabsContentDivUl.append(scriptThingTabsContentScriptli);
+		scriptThingTabsContentDivUl.append(scriptThingTabsContentRequestli);
 
 
-		// ret.append(ScriptTabsContentDivLeft);
-		// ret.append(ScriptTabsContentDivRight);
+		var scriptThingTabsContentDivTabContent = $('<div>',{
+			'class':'scriptTabsContentDivSecondTabContent tab-content'
+		});
+		var ScriptThingTabsContentScriptTabContentDiv = scriptInformation.createScriptThingTabsContentScriptTabContent(scriptNodeId);
+		var ScriptThingTabsContentRequestTabContentDiv = scriptInformation.createScriptThingTabsContentRequestTabContent(scriptNodeId);
+		scriptThingTabsContentDivTabContent.append(ScriptThingTabsContentScriptTabContentDiv);
+		scriptThingTabsContentDivTabContent.append(ScriptThingTabsContentRequestTabContentDiv);
+
+		ret.append(scriptThingTabsContentDivUl);
+		ret.append(scriptThingTabsContentDivTabContent);
+		return ret;
+	},
+
+	//次函数是用来产生在脚本事件tab页面中脚本tab的主要内容，传入的是脚本节点id，
+	createScriptThingTabsContentScriptTabContent:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'scriptTab2Content tab-pane fade in active',
+			'id':'ScriptThingTabsContentScriptTabContentDiv'+scriptNodeId,
+		});
+		var scriptTextarea = $('<textarea>',{
+			'class':'scriptTextarea',
+			'text':'this is script tab content'
+		});
+		ret.append(scriptTextarea);
+		return ret;
+	},
+
+	createScriptThingTabsContentRequestTabContent:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'scriptTab2Content tab-pane fade',
+			'id':'ScriptThingTabsContentRequestTabContentDiv'+scriptNodeId
+		});
+
+		var requestTabContent = scriptInformation.createScriptRequestTabContent();
+		ret.append(requestTabContent);
+		
 		return ret;
 	},
 
@@ -540,48 +563,71 @@ var scriptInformation={
 		var ret = $('<div>',{
 			'class':'ScriptTabsContentTabContent tab-pane fade',
 			'id':'ScriptEndTabsContentDiv'+scriptNodeId,
-			'text':'end'+scriptNodeId
 		});
 
-		// var scriptTabsContentRightTab = $('<div>',{
-		// 	'class':'scriptTabsContentRightTab'
-		// });
+		var scriptEndTabsContentDivUl = $('<ul>',{
+			'class':'scriptTabsContentDivTab'
+		});
+		var scriptEndTabsContentScriptli = $('<li>',{
+			'class':'scriptTabsContentli'
+		});
+		var scriptEndTabsContentScripta = $('<a>',{
+			'href':'#ScriptEndTabsContentScriptTabContentDiv'+scriptNodeId,
+			'data-toggle':'tab',
+			'text':'脚本'
+		});
+		scriptEndTabsContentScriptli.append(scriptEndTabsContentScripta);
 
-		// var scriptTabsContentRightTabContent = $('<div>',{
-		// });
-		// var scriptInitializea = $('<a>',{
-		// 	'href':'#',
-		// 	'data-toggle':'tab',
-		// 	'text':'初始化'
-		// });
-		// scriptInitializeli.append(scriptInitializea);
+		var  scriptEndTabsContentRequestli = $('<li>',{
+			'class':'scriptTabsContentli'
+		});
+		var scriptEndTabsContentRequesta = $('<a>',{
+			'href':'#ScriptEndTabsContentRequestTabContentDiv'+scriptNodeId,
+			'data-toggle':'tab',
+			'text':'请求'
+		});
+		scriptEndTabsContentRequestli.append(scriptEndTabsContentRequesta);
 
-		// var scriptThingli = $('<li>',{
-		// });
-		// var scriptThinga = $('<a>',{
-		// 	'href':'#',
-		// 	'data-toggle':'tab',
-		// 	'text':'事件'
-		// });
-		// scriptThingli.append(scriptThinga);
-
-		// var  scriptEndli = $('<li>',{
-		// });
-		// var scriptEnda = $('<a>',{
-		// 	'href':'#',
-		// 	'data-toggle':'tab',
-		// 	'text':'结束'
-		// });
-		// scriptEndli.append(scriptEnda);
-
-		// scriptTabsContentUl.append(scriptInitializeli);
-		// scriptTabsContentUl.append(scriptThingli);
-		// scriptTabsContentUl.append(scriptEndli);
-		// ScriptTabsContentDivLeft.append(scriptTabsContentUl);
+		scriptEndTabsContentDivUl.append(scriptEndTabsContentScriptli);
+		scriptEndTabsContentDivUl.append(scriptEndTabsContentRequestli);
 
 
-		// ret.append(ScriptTabsContentDivLeft);
-		// ret.append(ScriptTabsContentDivRight);
+		var scriptEndTabsContentDivTabContent = $('<div>',{
+			'class':'scriptTabsContentDivSecondTabContent tab-content'
+		});
+		var ScriptEndTabsContentScriptTabContentDiv = scriptInformation.createScriptEndTabsContentScriptTabContent(scriptNodeId);
+		var ScriptEndTabsContentRequestTabContentDiv = scriptInformation.createScriptEndTabsContentRequestTabContent(scriptNodeId);
+		scriptEndTabsContentDivTabContent.append(ScriptEndTabsContentScriptTabContentDiv);
+		scriptEndTabsContentDivTabContent.append(ScriptEndTabsContentRequestTabContentDiv);
+
+		ret.append(scriptEndTabsContentDivUl);
+		ret.append(scriptEndTabsContentDivTabContent);
+		return ret;
+	},
+
+	//次函数是用来产生在脚本结束tab页面中脚本tab的主要内容，传入的是脚本节点id，
+	createScriptEndTabsContentScriptTabContent:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'scriptTab2Content tab-pane fade in active',
+			'id':'ScriptEndTabsContentScriptTabContentDiv'+scriptNodeId,
+		});
+		var scriptTextarea = $('<textarea>',{
+			'class':'scriptTextarea',
+			'text':'this is script tab content'
+		});
+		ret.append(scriptTextarea);
+		return ret;
+	},
+
+	createScriptEndTabsContentRequestTabContent:function(scriptNodeId){
+		var ret = $('<div>',{
+			'class':'scriptTab2Content tab-pane fade',
+			'id':'ScriptEndTabsContentRequestTabContentDiv'+scriptNodeId
+		});
+
+		var requestTabContent = scriptInformation.createScriptRequestTabContent();
+		ret.append(requestTabContent);
+		
 		return ret;
 	},
 
