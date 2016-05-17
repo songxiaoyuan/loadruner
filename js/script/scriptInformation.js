@@ -21,7 +21,7 @@ var scriptInformation={
 		else{
 			//现在就在显示
 		}
-		//然后显示有关script的div。
+		//然后显示有关script的div.
 	},
 
 	//添加有关脚本的工具栏,返回是一个div.
@@ -415,13 +415,68 @@ var scriptInformation={
 		var requestTabContentRightTable = $('<table>',{
 			'class':'requestTabContentRightTable',
 			'border':'1',
-			'cellspacing':'0'
-
+			'cellspacing':'0',
+			'cellpadding':'5',
+			'style':'word-break:break-all; word-wrap:break-all;'
 		});
 		var tableHeadTr = $('<tr>',{
-
+			'height':'10'
 		});
+		var tableHeadURL = $('<td>',{
+			'text':'URL',
+			'width':'100'
+		});
+		var tableHeadSpace = $('<td>',{
+			'width':'10'
+		});
+		var tableHeadData = $('<td>',{
+			'text':'请求及相应数据',
+			'width':'120'
+		});
+		tableHeadTr.append(tableHeadURL);
+		tableHeadTr.append(tableHeadSpace);
+		tableHeadTr.append(tableHeadData);
 
+		var tableContentTr = $('<tr>',{
+		});
+		var tableContentURL = $('<td>',{
+			'text':'https://www.baidu.com',
+			'height':'30',
+			'rowspan':'2'
+		});
+		var tableContentRequest = $('<td>',{
+			'text':'请求',
+			'height':'15',
+			'width':'10'
+		});
+		var tableContentRequestData = $('<td>',{
+			'text':'GET/ KKKKKKKK',
+			'height':'15',
+			'width':'100'
+		});
+		tableContentTr.append(tableContentURL);
+		tableContentTr.append(tableContentRequest);
+		tableContentTr.append(tableContentRequestData);
+
+		var tableContentTr2 = $('<tr>',{
+		});
+		var tableContentRequest2 = $('<td>',{
+			'text':'响应',
+			'height':'15',
+			'width':'20'
+		});
+		var tableContentRequest2Data = $('<td>',{
+			'text':'HTTP/1.1 200 OK',
+			'height':'15',
+			'width':'100'
+		});
+		tableContentTr2.append(tableContentRequest2);
+		tableContentTr2.append(tableContentRequest2Data);
+
+
+		requestTabContentRightTable.append(tableHeadTr);
+		requestTabContentRightTable.append(tableContentTr);
+		requestTabContentRightTable.append(tableContentTr2);
 		requestTabContentRight.append(requestTabContentRightHead);
 		requestTabContentRight.append(requestTabContentRightTable);
 		
