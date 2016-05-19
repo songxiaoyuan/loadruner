@@ -224,7 +224,7 @@ var scriptInformation={
 			'role':'tablist'
 		});
 		var scriptTabsContent = $('<div>',{
-			'class':'tab-content'
+			'class':'tab-content allScriptTabsContent'
 		});
 		scriptTabs.append(scriptTabsUl);
 		scriptTabs.append(scriptTabsContent);
@@ -363,7 +363,7 @@ var scriptInformation={
 	//次函数是用来产生在脚本初始化tab页面中脚本tab的主要内容，传入的是脚本节点id，
 	createScriptInitializeTabsContentScriptTabContent:function(scriptNodeId){
 		var ret = $('<div>',{
-			'class':'scriptTab2Content tab-pane fade in active',
+			'class':'scriptTab2Content scriptTab2ScriptContent tab-pane fade in active',
 			'id':'ScriptInitializeTabsContentScriptTabContentDiv'+scriptNodeId,
 		});
 		var scriptTextarea = $('<textarea>',{
@@ -629,6 +629,18 @@ var scriptInformation={
 		ret.append(requestTabContent);
 		
 		return ret;
+	},
+
+	//次函数的作用就是找到现在正在点击的脚本的div内容，返回的是脚本的div的tab的内容。也就是
+	//createScriptInformationDeatilsDiv类的div
+	getActiveScriptDiv:function(){
+		var activeDiv = $('.allScriptTabsContent > .active > .createScriptInformationDeatilsDiv');
+		var ScriptTabsContentDiv=activeDiv.children('.ScriptTabsContentDiv');
+		var ScriptTabsContentTabContent = ScriptTabsContentDiv.children('.ScriptTabsContentDivRight').children('.active');
+		var scriptTab2ScriptContent = ScriptTabsContentTabContent.children('.scriptTabsContentDivSecondTabContent').children('.scriptTab2ScriptContent');
+		var scriptTextarea = scriptTab2ScriptContent.children('textarea,.scriptTextarea');
+		console.log(scriptTab2ScriptContent.attr('class'));
+		console.log(scriptTextarea.attr('class'));
 	},
 
 }

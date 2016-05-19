@@ -5,4 +5,8 @@ var scriptMain={
 		createScriptModal.initialize();
 	},
 
+	setParameterOnClick:function(){
+		scriptInformation.getActiveScriptDiv();
+	},
+
 }

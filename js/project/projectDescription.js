@@ -5,7 +5,7 @@ var projectDescription = {
 		//TODO:如果需要提示保存现有信息，我觉得应该保存现有项目的信息。
 		$('#projectInformationFun').remove();
 		$('#projectResourceFun').remove();
-		$('#projectDetails').remove();
+		$('#Description > div').remove();
 		
 		var projectDetails = this.projectDetails();
 		$('#Description').append(projectDetails);
@@ -102,13 +102,16 @@ var projectDescription = {
 			'id':'projectResourceContent'
 		});
 
-		var projectResourceData = appData.projectResourceData;
+		var projectResourceData = [];
+		var newData = appData.newProjectResourceData;
+		//deep copy
+		$.extend(true,projectResourceData,newData);
+		appData.projectResourceData = projectResourceData;
 
 		projectResourceContent.treeview({
 		  showBorder: false,
-		  data: projectResourceData
+		  data: newData
 		});
-
 
 		ret.append(projectResourceHeader);
 		ret.append(projectResourceContent);
@@ -289,9 +292,7 @@ var projectDescription = {
 
 	projectNameOnClick:function(){
 		$('#Description > div').hide();
-		console.log('hideeeeeeeeeeeeeeeee');
 		$('#projectDetails').show();
-		console.log('shouwwwwwwwwwwwwwwwwww');
 		
 	},
 

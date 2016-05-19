@@ -61,7 +61,8 @@ var scriptli ={
     	var setParametersli = $('<li>');
     	var setParametersa = $('<a>',{
     		'href':'#',
-    		'text':'设置参数'
+    		'text':'设置参数',
+            'onclick':'scriptli.setParameterOnClick()'
     	});
     	setParametersli.append(setParametersa);
     	var addCorrelationli = $('<li>');
@@ -103,5 +104,10 @@ var scriptli ={
     startRecordaOnClick:function(){
         //此函数就是用来创建一个新的脚本。
         scriptMain.createScriptModal();
-    }
+    },
+
+    setParameterOnClick:function(){
+        //此函数就是用来创建一个新的脚本。
+        scriptMain.setParameterOnClick();
+    },
 }
