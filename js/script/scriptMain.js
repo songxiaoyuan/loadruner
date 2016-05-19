@@ -6,7 +6,7 @@ var scriptMain={
 	},
 
 	setParameterOnClick:function(){
-		scriptInformation.getActiveScriptDiv();
+		setParameter.setParameterOnClick();
 	},
 
 }

@@ -535,7 +535,7 @@ var scriptInformation={
 	//次函数是用来产生在脚本事件tab页面中脚本tab的主要内容，传入的是脚本节点id，
 	createScriptThingTabsContentScriptTabContent:function(scriptNodeId){
 		var ret = $('<div>',{
-			'class':'scriptTab2Content tab-pane fade in active',
+			'class':'scriptTab2Content scriptTab2ScriptContent tab-pane fade in active',
 			'id':'ScriptThingTabsContentScriptTabContentDiv'+scriptNodeId,
 		});
 		var scriptTextarea = $('<textarea>',{
@@ -608,7 +608,7 @@ var scriptInformation={
 	//次函数是用来产生在脚本结束tab页面中脚本tab的主要内容，传入的是脚本节点id，
 	createScriptEndTabsContentScriptTabContent:function(scriptNodeId){
 		var ret = $('<div>',{
-			'class':'scriptTab2Content tab-pane fade in active',
+			'class':'scriptTab2Content scriptTab2ScriptContent tab-pane fade in active',
 			'id':'ScriptEndTabsContentScriptTabContentDiv'+scriptNodeId,
 		});
 		var scriptTextarea = $('<textarea>',{
@@ -639,8 +639,8 @@ var scriptInformation={
 		var ScriptTabsContentTabContent = ScriptTabsContentDiv.children('.ScriptTabsContentDivRight').children('.active');
 		var scriptTab2ScriptContent = ScriptTabsContentTabContent.children('.scriptTabsContentDivSecondTabContent').children('.scriptTab2ScriptContent');
 		var scriptTextarea = scriptTab2ScriptContent.children('textarea,.scriptTextarea');
-		console.log(scriptTab2ScriptContent.attr('class'));
-		console.log(scriptTextarea.attr('class'));
+
+		return scriptTab2ScriptContent;
 	},
 
 }
