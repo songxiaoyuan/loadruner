@@ -34,11 +34,13 @@ var setParameter={
 		});
 		var parameterListDivHeadParameterizationButton = $('<button>',{
 			'class':'parameterListDivHeadParameterizationButton',
-			'text':'参数化'
+			'text':'参数化',
+			'onclick':'createScriptParameterizationModal.initialize()'
 		});
 		var parameterListDivHeadCorrelationButton = $('<button>',{
 			'class':'parameterListDivHeadParameterizationButton',
-			'text':'关联'
+			'text':'关联',
+			'onclick':'createScriptCorrelationModal.initialize()'
 		});
 		parameterListDivHead.append(parameterListDivHeadText);
 		parameterListDivHead.append(parameterListDivHeadCorrelationButton);

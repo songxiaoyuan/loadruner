@@ -40,7 +40,7 @@ var scriptInformation={
 		var recordScriptButton = $('<button>',{
 			'text':'录制脚本',
 			'class':'buttonInLine',
-			'onclick':''
+			'onclick':'scriptMain.createScriptModal()'
 		});
 		recordScriptDiv.append(recordScriptIcon);
 		recordScriptDiv.append(recordScriptButton);
@@ -145,7 +145,7 @@ var scriptInformation={
 		var parameterizationButton = $('<button>',{
 			'text':'参数化',
 			'class':'buttonInLine',
-			'onclick':''
+			'onclick':'createScriptParameterizationModal.initialize()'
 		});
 		parameterizationDiv.append(parameterizationIcon);
 		parameterizationDiv.append(parameterizationButton);
@@ -160,7 +160,7 @@ var scriptInformation={
 		var correlationButton = $('<button>',{
 			'text':'关联',
 			'class':'buttonInLine',
-			'onclick':''
+			'onclick':'createScriptCorrelationModal.initialize()'
 		});
 		correlationDiv.append(correlationIcon);
 		correlationDiv.append(correlationButton);
@@ -169,7 +169,7 @@ var scriptInformation={
 			'class':'buttonInLine'
 		});
 		var runtimeSettingIcon = $('<div>',{
-			'id':'scriptToolBarruntimeSettingIcon',
+			'id':'scriptToolBarRuntimeSettingIcon',
 			'class':'buttonInLine',
 		});
 		var runtimeSettingButton = $('<button>',{
