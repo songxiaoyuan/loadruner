@@ -225,6 +225,152 @@ body {
   height: 70%;
   border: 1px solid #eeeeee;
 }
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .randomNumberClass {
+  width: 100%;
+  height: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .randomNumberClass .randomNumberClassDivLeft {
+  width: 50%;
+  height: 100%;
+  float: left;
+  border: 1px solid #eeeeee;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .randomNumberClass .randomNumberClassDivRight {
+  width: 50%;
+  height: 100%;
+  float: left;
+  border: 1px solid #eeeeee;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .randomNumberClass .randomNumberClassDivRight .parameterValueDiv {
+  width: 100%;
+  height: 7%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .randomNumberClass .randomNumberClassDivRight .parameterValueTableDiv {
+  width: 100%;
+  height: 93%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .randomNumberClass .randomNumberClassDivRight .parameterValueTableDiv table {
+  width: 100%;
+  height: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .randomNumberClass .randomNumberClassDivRight .parameterValueTableDiv table tbody {
+  width: 100%;
+  height: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .randomNumberClass .randomNumberClassDivRight .parameterValueTableDiv table tbody tr {
+  width: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .randomNumberClass .randomNumberClassDivRight .parameterValueTableDiv table tbody tr td {
+  width: 33.3%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromFileClass {
+  width: 100%;
+  height: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromFileClass .parameterValueDiv {
+  width: 100%;
+  height: 7%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromFileClass .readFromFileClassDivDown {
+  width: 100%;
+  height: 93%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromFileClass .readFromFileClassDivDown .readFromFileClassDivDownLeft {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromFileClass .readFromFileClassDivDown .readFromFileClassDivDownRight {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromFileClass .readFromFileClassDivDown .readFromFileClassDivDownRight table {
+  width: 100%;
+  height: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromFileClass .readFromFileClassDivDown .readFromFileClassDivDownRight table tbody {
+  width: 100%;
+  height: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromFileClass .readFromFileClassDivDown .readFromFileClassDivDownRight table tbody tr {
+  width: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromFileClass .readFromFileClassDivDown .readFromFileClassDivDownRight table tbody tr td {
+  width: 33.3%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromDataBaseClass {
+  width: 100%;
+  height: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromDataBaseClass .readFromDataBaseClassUpDiv {
+  width: 100%;
+  height: 85%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromDataBaseClass .readFromDataBaseClassUpDiv .readFromDataBaseClassUpDivLeft {
+  width: 55%;
+  height: 100%;
+  float: left;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromDataBaseClass .readFromDataBaseClassUpDiv .readFromDataBaseClassUpDivRight {
+  width: 45%;
+  height: 100%;
+  float: left;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromDataBaseClass .readFromDataBaseClassUpDiv .readFromDataBaseClassUpDivRight .readFromDataBaseClassUpDivRightUpDiv {
+  width: 100%;
+  height: 15%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromDataBaseClass .readFromDataBaseClassUpDiv .readFromDataBaseClassUpDivRight .readFromDataBaseClassUpDivRightDownDiv {
+  width: 100%;
+  height: 85%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromDataBaseClass .readFromDataBaseClassDownDiv {
+  width: 100%;
+  height: 15%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .readFromDataBaseClass .readFromDataBaseClassDownDiv .readFromDataBaseClassDownDivButton {
+  float: right;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .userDefinedClass {
+  width: 100%;
+  height: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .userDefinedClass .userDefinedClassUpDiv {
+  width: 100%;
+  height: 85%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .userDefinedClass .userDefinedClassUpDiv table {
+  width: 100%;
+  height: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .userDefinedClass .userDefinedClassUpDiv table tbody {
+  width: 100%;
+  height: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .userDefinedClass .userDefinedClassUpDiv table tbody tr {
+  width: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .userDefinedClass .userDefinedClassUpDiv table tbody tr td {
+  width: 33.3%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .userDefinedClass .userDefinedClassDownDiv {
+  width: 100%;
+  height: 15%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .userDefinedClass .userDefinedClassDownDiv .userDefinedClassDownDivButton {
+  float: right;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .regularExpressionClass {
+  width: 100%;
+  height: 100%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .regularExpressionClass label {
+  width: 25%;
+}
+.scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .regularExpressionClass input {
+  width: 75%;
+}
 .createScriptInformationDeatilsDiv {
   width: 100%;
   height: 920px;
