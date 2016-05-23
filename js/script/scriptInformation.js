@@ -100,7 +100,7 @@ var scriptInformation={
 		var beginThingButton = $('<button>',{
 			'text':'事物开始',
 			'class':'buttonInLine',
-			'onclick':''
+			'onclick':'createScriptThingModal.initializeStartThing()'
 		});
 		beginThingDiv.append(beginThingIcon);
 		beginThingDiv.append(beginThingButton);
@@ -115,7 +115,7 @@ var scriptInformation={
 		var stopThingButton = $('<button>',{
 			'text':'事物结束',
 			'class':'buttonInLine',
-			'onclick':''
+			'onclick':'createScriptThingModal.initializeEndThing()'
 		});
 		stopThingDiv.append(stopThingIcon);
 		stopThingDiv.append(stopThingButton);

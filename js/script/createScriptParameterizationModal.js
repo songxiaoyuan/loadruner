@@ -304,11 +304,11 @@ var createScriptParameterizationModal = {
 			'class':'ScriptParameterizationModalBodyContentRightDownDiv'
 		});
 
-		var randomNumberClass = createScriptParameterizationModal.createRandomNumberClassDiv();
-		var readFromFileClass = createScriptParameterizationModal.createReadFromFileClassDiv();
-		var readFromDataBaseClass = createScriptParameterizationModal.createReadFromDataBaseClassDiv();
-		var userDefinedClass = createScriptParameterizationModal.createUserDefinedClassDiv();
-		var regularExpressionClass = createScriptParameterizationModal.createRegularExpressionClassDiv();
+		var randomNumberClass = createScriptParameterizationModal.createRandomNumberClassDiv(tabName);
+		var readFromFileClass = createScriptParameterizationModal.createReadFromFileClassDiv(tabName);
+		var readFromDataBaseClass = createScriptParameterizationModal.createReadFromDataBaseClassDiv(tabName);
+		var userDefinedClass = createScriptParameterizationModal.createUserDefinedClassDiv(tabName);
+		var regularExpressionClass = createScriptParameterizationModal.createRegularExpressionClassDiv(tabName);
 
 		ret.append(randomNumberClass);
 		ret.append(readFromFileClass);
