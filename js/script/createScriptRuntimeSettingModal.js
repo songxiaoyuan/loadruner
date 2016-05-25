@@ -181,21 +181,225 @@ var createScriptRuntimeSettingModal = {
 		var ret = $('<div>',{
 			'class':'rightTabContentDiv tab-pane fade in active',
 			'id':'ScriptRuntimeSettingModalBodyContentRightRunLogicTabContent',
-			'text':'ScriptRuntimeSettingModalBodyContentRightRunLogicTabContent'
+		});
+		var runLogicContentUp = $('<div>',{
+			'class':'runLogicContentUp form-group'
+		});
+		var runLogicContentDown = $('<div>',{
+			'class':'runLogicContentDown'
 		});
 
+		var runLogicLable = $('<label>',{
+			'for':'runLogicLable',
+			'text':'迭代次数'
+		});
+		var runLogicInput = $('<input>',{
+			'class':'runLogicInput',
+			'type':'text',
+			'placeholder':'2'
+		})
+		runLogicContentUp.append(runLogicLable);
+		runLogicContentUp.append(runLogicInput);
+
+		var scriptDiv = $('<div>',{
+			'text':'脚本1'
+		});
+		var scriptInitializeDiv = $('<div>',{
+			'text':'初始化'
+		});
+		var scriptThingDiv = $('<div>',{
+			'text':'事件（x2）'
+		});
+		var scriptEndDiv = $('<div>',{
+			'text':'结束'
+		});
+		runLogicContentDown.append(scriptDiv);
+		runLogicContentDown.append(scriptInitializeDiv);
+		runLogicContentDown.append(scriptThingDiv);
+		runLogicContentDown.append(scriptEndDiv);
+
+
+		ret.append(runLogicContentUp);
+		ret.append(runLogicContentDown);
 		return ret;
 	},
 
 	createRightStepTabContent:function() {
 		var ret = $('<div>',{
 			'class':'rightTabContentDiv tab-pane fade',
-			'id':'ScriptRuntimeSettingModalBodyContentRightStepTabContent',
-			'text':'ScriptRuntimeSettingModalBodyContentRightStepTabContent'
+			'id':'ScriptRuntimeSettingModalBodyContentRightStepTabContent'
 		});
 
+
+		var lastEndStartNowDiv = $('<div>',{
+			'class':'lastEndStartNow'
+		});
+		var lastEndStartNowRadio = $('<input>',{
+			'type':'radio',
+			'name':'StepTabContentRadio',
+			'onclick':'createScriptRuntimeSettingModal.radioOnClick()',
+			'value':'1',
+			'checked':'true'
+		});
+		var lastEndStartNowLable=$('<label>',{
+			'text':'上一次循环结束后立即开始'
+		});
+		lastEndStartNowDiv.append(lastEndStartNowRadio);
+		lastEndStartNowDiv.append(lastEndStartNowLable);
+
+		var lastEnd = $('<div>',{
+			'class':'lastEnd everySelectRadio'
+		});
+		var lastEndRadio = $('<input>',{
+			'type':'radio',
+			'name':'StepTabContentRadio',
+			'onclick':'createScriptRuntimeSettingModal.radioOnClick()',
+			'value':'2',
+		});
+		var lastEndLable=$('<label>',{
+			'text':'上一次循环结束后'
+		});
+		var selectEnd = createScriptRuntimeSettingModal.createStepTabContentSelectDiv();
+		selectEnd.addClass('stepTabContentDivSelectLastEndShowDiv');
+		lastEnd.append(lastEndRadio);
+		lastEnd.append(lastEndLable);
+		lastEnd.append(selectEnd);
+
+		var lastStart = $('<div>',{
+			'class':'lastStart everySelectRadio'
+		});
+		var lastStartRadio = $('<input>',{
+			'type':'radio',
+			'name':'StepTabContentRadio',
+			'onclick':'createScriptRuntimeSettingModal.radioOnClick()',
+			'value':'3',
+		});
+		var lastStartLable=$('<label>',{
+			'text':'上一次循环开始后'
+		});
+		var selectStart = createScriptRuntimeSettingModal.createStepTabContentSelectDiv();
+		selectStart.addClass('stepTabContentDivSelectLastStartShowDiv');
+		lastStart.append(lastStartRadio);
+		lastStart.append(lastStartLable);
+		lastStart.append(selectStart);
+
+		ret.append(lastEndStartNowDiv);
+		ret.append(lastEnd);
+		ret.append(lastStart);
 		return ret;
 	},
+
+	radioOnClick:function() {
+		var selectRadio = $('#ScriptRuntimeSettingModalBodyContentRightStepTabContent input:radio:checked').val();
+		if (selectRadio == '2') {
+			//表示点击的是上一次循环结束后，将里面的select和input变得可以编辑，别的select和input不能编辑
+			var showDiv = $('.stepTabContentDivSelectLastEndShowDiv');
+			showDiv.find('select').attr('disabled',false);
+			showDiv.find('input').attr('disabled',false);
+			var disableDiv = $('.stepTabContentDivSelectLastStartShowDiv');
+			disableDiv.find('select').attr('disabled',true);
+			disableDiv.find('input').attr('disabled',true);
+		}
+		else if (selectRadio == '3') {
+			//表示点击的是上一次循环开始后，将里面的select和input变得可以编辑，别的select和input不能编辑
+			var showDiv = $('.stepTabContentDivSelectLastStartShowDiv');
+			showDiv.find('select').attr('disabled',false);
+			showDiv.find('input').attr('disabled',false);
+			var disableDiv = $('.stepTabContentDivSelectLastEndShowDiv');
+			disableDiv.find('select').attr('disabled',true);
+			disableDiv.find('input').attr('disabled',true);
+		}
+		else{
+			//表示点击的是上一次循环结束后立即开始，所有的select和input都不能编辑
+			var showDiv = $('.stepTabContentSelectOptionDiv');
+			showDiv.find('select').attr('disabled',false);
+			showDiv.find('input').attr('disabled',false);
+		}
+	},
+
+	createStepTabContentSelectDiv:function() {
+	    var ret = $('<div>',{
+	    	'class':'stepTabContentSelectOptionDiv',
+	    });
+
+	    var selectTimeType = $('<select>',{
+	    	'class':'selectTimeType',
+	    	'disabled':'true',
+	    });
+	    var optionFix = $('<option>',{
+	    	'value':'stepTabContentSelectOptionShowFixDiv',
+	    	'text':'固定'
+	    });
+	    var optionRandom = $('<option>',{
+	    	'value':'stepTabContentSelectOptionShowRandomDiv',
+	    	'text':'随机'
+	    });
+	    selectTimeType.append(optionFix);
+	    selectTimeType.append(optionRandom);
+
+	    var showDiv = $('<div>',{
+	    	'class':'stepTabContentSelectOptionShow'
+	    });
+	    var showDivFixDiv = $('<div>',{
+	    	'class':'stepTabContentSelectOptionShowFixDiv'
+	    });
+	    var showDivFixDivIntervalLable = $('<label>',{
+	    	'text':'间隔'
+	    });
+	    var showDivFixDivInput = $('<input>',{
+	    	'type':'text',
+	    	'disabled':'true',
+	    });
+	    var showDivFixDivSecondLable = $('<label>',{
+	    	'text':'秒'
+	    });
+	    showDivFixDiv.append(showDivFixDivIntervalLable);
+	    showDivFixDiv.append(showDivFixDivInput);
+	    showDivFixDiv.append(showDivFixDivSecondLable);
+
+	    var showDivRandomDiv = $('<div>',{
+	    	'class':'stepTabContentSelectOptionShowRandomDiv'
+	    });
+	    var showDivRandomDivIntervalLable = $('<label>',{
+	    	'text':'间隔'
+	    });
+	    var showDivRandomDivInput = $('<input>',{
+	    	'type':'text',
+	    	'disabled':'true',
+	    });
+	    var showDivRanomDivSecondToLable = $('<label>',{
+	    	'text':'秒至'
+	    });
+	    var showDivRandomDivSecondInput = $('<input>',{
+	    	'type':'text',
+	    	'disabled':'true',
+	    });
+	    var showDivRanomDivSecondLable = $('<label>',{
+	    	'text':'秒'
+	    });
+	    showDivRandomDiv.append(showDivRandomDivIntervalLable);
+	    showDivRandomDiv.append(showDivRandomDivInput);
+	    showDivRandomDiv.append(showDivRanomDivSecondToLable);
+	    showDivRandomDiv.append(showDivRandomDivSecondInput);
+	    showDivRandomDiv.append(showDivRanomDivSecondLable);
+
+	    showDiv.append(showDivFixDiv);
+	    showDiv.append(showDivRandomDiv);
+	    showDiv.children('div').hide();
+	    showDiv.children('.stepTabContentSelectOptionShowFixDiv').show();
+
+	    //绑定事件，及选择取值方式之后，下方的div会根据选择不同的值而发生变化。
+	    selectTimeType.change(function() {
+	    	var classType = $(this).children('option:selected').val();
+	    	showDiv.children('div').hide();	
+	    	showDiv.children('.'+classType).show();
+	    });
+
+	    ret.append(selectTimeType);
+	    ret.append(showDiv);
+	    return ret;
+	},
+
 	createRightLogTabContent:function() {
 		var ret = $('<div>',{
 			'class':'rightTabContentDiv tab-pane fade',
