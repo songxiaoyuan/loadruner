@@ -138,6 +138,8 @@ var createScriptThingModal = {
 	//此函数的作用是用来产生点击确定所发生的操作，包括在textarea里面插入文字。
 	createScriptThingModalFooterStartConfirmOnClick:function(){
 		
+		//TODO：能够获取到名字，先获取着，看以后怎么做。
+		var name = $('#createScriptThingModalBodyInput')[0].value;
 		var insertStr = '\nStart_transaction("事物1")\nsnapshot="t1"\nReferencePage:"http://www.baidu.com"\n';
 		createScriptThingModal.insertTextarea(insertStr);
 		createScriptThingModal.removeCreateScriptThingModalStart();

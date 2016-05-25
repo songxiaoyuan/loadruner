@@ -55,7 +55,7 @@ var scriptli ={
     	var thingli = $('<li>');
     	var thinga = $('<a>',{
     		'href':'#',
-    		'text':'事物'
+    		'text':'事务'
     	});
     	thingli.append(thinga);
     	var setParametersli = $('<li>');
