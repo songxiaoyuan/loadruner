@@ -1,19 +1,19 @@
-var createScriptModal = {
+var createScriptRallyPointModal = {
 	initialize:function() {
-		if($('#createScriptModal').length>0){
-			$("#createScriptModal").modal("show");
+		if($('#createScriptRallyPointModal').length>0){
+			$("#createScriptRallyPointModal").modal("show");
 		}
 		else{
-			var scriptModal = this.createScriptModal();
+			var scriptModal = this.createScriptRallyPointModal();
 			$('#container').append(scriptModal);
-			$("#createScriptModal").modal("show");
+			$("#createScriptRallyPointModal").modal("show");
 		}
 	},
 	//创建modal的主要部分
-	createScriptModal:function(){
+	createScriptRallyPointModal:function(){
 		var createScriptModal = $('<div>',{
 			'class':'modal',
-			'id':'createScriptModal'
+			'id':'createScriptRallyPointModal'
 		});
 		var modalDialog = $('<div>',{
 			'class':'modal-dialog'
@@ -21,9 +21,9 @@ var createScriptModal = {
 		var modalContent = $('<div>',{
 			'class':'modal-content'
 		});
-		var modalHeader = this.createScriptModalHeader();
-		var modalBody = this.createScriptModalBody();
-		var ModalFooter = this.createScriptModalFooter();
+		var modalHeader = this.createScriptRallyPointModalHeader();
+		var modalBody = this.createScriptRallyPointModalBody();
+		var ModalFooter = this.createScriptRallyPointModalFooter();
 
 		modalContent.append(modalHeader);
 		modalContent.append(modalBody);
@@ -34,327 +34,94 @@ var createScriptModal = {
 
 		return createScriptModal;
 	},
-	createScriptModalHeader:function(){
+	createScriptRallyPointModalHeader:function(){
 		var modalHeader = $('<div>',{
 			'class':'modal-header',
-			'id':'createScriptModalHeader',
-			'text':'选择协议'
+			'text':'添加集合点'
 		});
 		return modalHeader;
 	},
-	createScriptModalBody:function(){
+	createScriptRallyPointModalBody:function(){
 		var modalBody = $('<div>',{
 			'class':'modal-body',
-			'id':'createScriptModalBody'
 		});
 		//注意，在里面添加具体内容，还是要加入div来添加
-		var createScriptModalBody1=this.createScriptModalBody1();
-		modalBody.append(createScriptModalBody1);
+		var tingName = $('<div>',{
+			'text':'集合点名称'
+		});
+		var tingNameInput = $('<input>',{
+			'type':'text',
+			'id':'createScriptRallyPointModalBodyInput'
+		});
+		modalBody.append(tingName);
+		modalBody.append(tingNameInput);
 
 		return modalBody;
 	},
-	createScriptModalFooter:function(){
+	createScriptRallyPointModalFooter:function(){
 		var modalFooter = $('<div>',{
 			'class':'modal-footer',
-			'id':'createScriptModalFooter'
 		});
-		var createScriptModalFooter1 = $('<div>',{
-			'class':'modal-footer',
-			'id':'createScriptModalFooter1'
+		var ConfirmButton = $('<button>',{
+			'class':'btn btn-default',
+			'id':'createScriptRallyPointModalFooterConfirm',
+			'data-dismiss':'modal',
+			'onclick':'createScriptRallyPointModal.createScriptRallyPointModalFooterConfirmOnClick()',
+			'text':'确定'
 		});
 		var closeButton = $('<button>',{
 			'class':'btn btn-default',
 			'data-dismiss':'modal',
-			'id':'createScriptModalFooter1CloseButton',
-			'onclick':'createScriptModal.removeCreateScriptModal()',
-			'text':'退出'     //注意，关闭之后就要把这个整体的model在container中删除
-		});
-		var nextButton = $('<button>',{
-			'class':'btn btn-default',
-			'id':'createScriptModalFooter1NextButton',
-			'onclick':'createScriptModal.createScriptModalFooter1NextButtonOnClick()',
-			'text':'下一步'
-		});
-
-		createScriptModalFooter1.append(closeButton);
-		createScriptModalFooter1.append(nextButton);
-
-		modalFooter.append(createScriptModalFooter1);
-		return modalFooter;
-	},
-
-	//此函数的作用是用来产生创建脚本时的modal的body部分的第一个界面
-	createScriptModalBody1:function(){
-		var ret = $('<div>',{
-			'class':'createScriptModalBody1',
-			'id':'createScriptModalBody1'
-		});
-
-		var createScriptModalBody1SelectProtocolTypeDiv = $('<div>',{
-		});
-		var createScriptModalBody1SelectProtocolType = $('<select>',{
-			'class':'createScriptModalBody1SelectProtocolType'
-		});
-
-		var selectProtocolType= ['全部协议','Web(Http/Html)','Web Service','SMTP','FTP','数据库'];
-		for(var i=0;i<selectProtocolType.length;i++){
-			var option = $('<option>',{
-				'value':selectProtocolType[i],
-				'text':selectProtocolType[i]
-			});
-			createScriptModalBody1SelectProtocolType.append(option);
-		}
-		createScriptModalBody1SelectProtocolTypeDiv.append(createScriptModalBody1SelectProtocolType)
-    	
-    	//TODO : 此处应该是有对应的选择那个类型协议，下面的东西应该筛选的功能。此处还没有实现。
-    	var createScriptModalBody1SelectProtocolDiv = $('<div>',{
-    	});
-		var createScriptModalBody1SelectProtocol = $('<select>',{
-			'class':'createScriptModalBody1SelectProtocol',
-			'multiple':'multiple'
-		});
-
-		var selectProtocol= ['Http请求','FTP请求','SMTP','SOAP/XML-RPC Request','TCP取样器','JDBC Request','MongDB Script'];
-		for(var i=0;i<selectProtocol.length;i++){
-			var option = $('<option>',{
-				'value':selectProtocol[i],
-				'text':selectProtocol[i]
-			});
-			createScriptModalBody1SelectProtocol.append(option);
-		}
-		createScriptModalBody1SelectProtocolDiv.append(createScriptModalBody1SelectProtocol);
-
-		ret.append(createScriptModalBody1SelectProtocolTypeDiv);
-		ret.append(createScriptModalBody1SelectProtocolDiv);
-		return ret;
-	},
-
-	//此函数的作用是用来产生创建脚本时的modal的body部分点击下一步产生的页面
-	createScriptModalBody2:function(){
-		var ret = $('<div>',{
-			'class':'createScriptModalBody2',
-			'id':'createScriptModalBody2'
-		});
-
-		var selectBrowserDiv = $('<div>',{
-		});
-		var selectBrowserText = $('<div>',{
-			'class':'selectBrowserText',
-			'text':'选择浏览器'
-		});
-		var selectBrowserInput = $('<input>',{
-			'type':'text',
-			'placeholder':'Mozilla FireFox'
-		});
-		var selectBrowserButton = $('<input>',{
-			'type':'file',
-			'text':'浏览',   //TODO注意此处应该是浏览之后，然后选择默认的浏览器，然后点击开始录制之后会自动的打开浏览器！！
-		});
-		selectBrowserDiv.append(selectBrowserText);
-		selectBrowserDiv.append(selectBrowserInput);
-		selectBrowserDiv.append(selectBrowserButton);
-
-		var URLPathDiv = $('<div>',{
-		});
-		var URLPathText = $('<div>',{
-			'class':'URLPathText',
-			'text':'RRL地址'
-		});
-		var URLPathInput = $('<input>',{
-			'type':'text',
-			'placeholder':'http://www.baidu.com'
-		});
-		URLPathDiv.append(URLPathText);
-		URLPathDiv.append(URLPathInput);
-
-		var recordLocationDiv = $('<div>',{
-		});
-		var recordLocationText = $('<div>',{
-			'class':'recordLocationText',
-			'text':'录制位置选择'
-		});
-		var recordLocationSelect = $('<select>',{
-			'class':'recordLocationSelect'
-		});
-		var selectRecordLocation= ['初始化','事件','结束'];
-		for(var i=0;i<selectRecordLocation.length;i++){
-			var option = $('<option>',{
-				'value':selectRecordLocation[i],
-				'text':selectRecordLocation[i]
-			});
-			recordLocationSelect.append(option);
-		}
-
-		recordLocationDiv.append(recordLocationText);
-		recordLocationDiv.append(recordLocationSelect);
-
-		var saveSnapShootDiv = $('<div>',{
-		});
-		var saveSnapShootInput = '<input type="checkbox">保存页面快照</input>';
-		saveSnapShootDiv.append(saveSnapShootInput);
-
-		var characterSupportDiv = $('<div>',{
-		});
-		var characterSupportInput = '<input type="checkbox" checked="true">字符支持</input>';
-		var characterSupport1Div = $('<div>',{
-		});
-		var characterSupport2Div = $('<div>',{
-		});
-		var characterSupport3Div = $('<div>',{
-		});
-		var characterSupport1 = '<input type="radio" name="characterSupport" value="UTF-8" checked="true">UTF-8</input>';
-		var characterSupport2 = '<input type="radio" name="characterSupport" value="GBK">GBK</input>';
-		var characterSupport3 = '<input type="radio" name="characterSupport" value="GB18030">GB18030</input>';
-		characterSupport1Div.append(characterSupport1);
-		characterSupport2Div.append(characterSupport2);
-		characterSupport3Div.append(characterSupport3);
-
-		characterSupportDiv.append(characterSupportInput);
-		characterSupportDiv.append(characterSupport1Div);
-		characterSupportDiv.append(characterSupport2Div);
-		characterSupportDiv.append(characterSupport3Div);
-
-		ret.append(selectBrowserDiv);
-		ret.append(URLPathDiv);
-		ret.append(recordLocationDiv);
-		ret.append(saveSnapShootDiv);
-		ret.append(characterSupportDiv);
-		return ret;
-	},
-
-	createScriptModalFooter2:function(){
-		var createScriptModalFooter2 = $('<div>',{
-			'class':'modal-footer',
-			'id':'createScriptModalFooter2'
-		});
-		var backButton = $('<button>',{
-			'class':'btn btn-default',
-			'id':'createScriptModalFooter1NextButton',
-			'onclick':'createScriptModal.createScriptModalFooter2BackButtonOnClick()',
-			'text':'上一步'
-		});
-		var startRecordButton = $('<button>',{
-			'class':'btn btn-default',
-			'id':'createScriptModalFooter1NextButton',
-			'data-dismiss':'modal',
-			'onclick':'createScriptModal.createScriptModalFooter2startRecordButtonOnClick()',
-			'text':'开始录制'
-		});
-		var closeButton = $('<button>',{
-			'class':'btn btn-default',
-			'data-dismiss':'modal',
-			'id':'createScriptModalFooter1CloseButton',
-			'onclick':'createScriptModal.removeCreateScriptModal()',
+			'id':'createScriptThingModalFooterQuit',
+			'onclick':'createScriptRallyPointModal.removeCreateScriptRallyPointModal()',
 			'text':'取消'     //注意，关闭之后就要把这个整体的model在container中删除
 		});
 
-		createScriptModalFooter2.append(backButton);
-		createScriptModalFooter2.append(startRecordButton);
-		createScriptModalFooter2.append(closeButton);
-
-		return createScriptModalFooter2;
+		modalFooter.append(ConfirmButton);
+		modalFooter.append(closeButton);
+		
+		return modalFooter;
 	},
 
-	//此函数的作用是用来产生点击下一步所发生的操作，包括将以前的 div隐藏
-	createScriptModalFooter1NextButtonOnClick:function(){
-
-		//隐藏以前div，
-		$('#createScriptModalBody1').hide();
-		$('#createScriptModalFooter1').hide();
-		$('#createScriptModalHeader').text('录制设置');
-
-		//添加显示现在div 如果有，表示是点击过上一步，直接显示就可以了
-		if($('#createScriptModalBody2').length>0){
-			$('#createScriptModalBody2').show();
-			$('#createScriptModalFooter2').show();
+	insertTextarea:function(insertValue) {
+		var activeDiv = $('.allScriptTabsContent > .active > .createScriptInformationDeatilsDiv');
+		var ScriptTabsContentDiv=activeDiv.children('.ScriptTabsContentDiv');
+		var ScriptTabsContentTabContent = ScriptTabsContentDiv.children('.ScriptTabsContentDivRight').children('.active');
+		var scriptTab2ScriptContent = ScriptTabsContentTabContent.children('.scriptTabsContentDivSecondTabContent').children('.scriptTab2ScriptContent');
+		if(scriptTab2ScriptContent.attr('class') && scriptTab2ScriptContent.attr('class').indexOf('activ') >0){
+			var scriptTextarea = scriptTab2ScriptContent.children('textarea,.scriptTextarea');
+			var textarea = scriptTextarea[0];
+			if (textarea.selectionStart || textarea.selectionStart =='0') {
+				var startPos = textarea.selectionStart;
+				var endPos = textarea.selectionEnd;
+				var scrollTop = textarea.scrollTop;
+				textarea.value = textarea.value.substring(0, startPos) + insertValue + textarea.value.substring(endPos, textarea.value.length);
+				scriptTextarea.focus();
+				textarea.selectionStart = startPos + insertValue.length;
+				textarea.selectionEnd = startPos + insertValue.length;
+				textarea.scrollTop = scrollTop;
+			}
 		}
 		else{
-			var createScriptModalBody= createScriptModal.createScriptModalBody2();
-			var createScriptModalFooter = createScriptModal.createScriptModalFooter2();
-			$('#createScriptModalBody').append(createScriptModalBody);
-			$('#createScriptModalFooter').append(createScriptModalFooter);
+			window.alert('can not find the scriptTab2ScriptContent and children textarea');
 		}
-
 	},
 
-	createScriptModalFooter2BackButtonOnClick:function(){
-
-		//隐藏以前div，
-		$('#createScriptModalBody2').hide();
-		$('#createScriptModalFooter2').hide();
-		$('#createScriptModalHeader').text('选择协议');
-
-		$('#createScriptModalBody1').show();
-		$('#createScriptModalFooter1').show();
-	},
-
-	createScriptModalFooter2startRecordButtonOnClick:function(){
-
-		//TODO:首先开始的是进入录制的界面，应该有一个悬浮窗口，然后有开发浏览器，输入URL
-
-		//TODO：现在因为没有做录屏，所以现在点击之后，先做脚本的展示工作，即，点击之后已经创建了一个脚本。
-
-		//首先更新数据，然后删除以前div，然后生产新的树形div。
-		var scriptInfo = appData.projectResourceData[0];
-		var scriptNodes = scriptInfo.nodes;
-		var scriptNode = {};
-		var len = scriptNodes.length;
-		scriptNode.text='脚本'+(len+1).toString();
-		scriptNode.class = 'script';
-		var nodeId = 'scriptId'+(len+1).toString();
-		scriptNode.id=nodeId;
-		var scriptNodeState={
-			addTab:true
-		};
-		scriptNode.state = scriptNodeState;
-		scriptNodes[len] = scriptNode;
-		scriptInfo.nodes=scriptNodes;
-		appData.projectResourceData[0] = scriptInfo;
-
-		$('#projectResourceContent').empty();
-		$('#projectResourceContent').treeview({
-		  showBorder: false,
-		  data: appData.projectResourceData,
-		  onNodeSelected: function(event, node) {
-		    switch(node.class){
-		    	case 'parent':
-		    	  //TODO：以后可以用来就是收缩树形结构，现在先不做。
-		    	  break;
-		    	case 'script':
-		    	  //表示点击的是脚本，
-		    	  createScriptModal.scriptNodeOnClick(node);
-		    	  break;
-		    	default:
-		    	  break;
-		    }
-		  },
-		});
-
+	//此函数的作用是用来产生点击确定所发生的操作，包括在textarea里面插入文字。
+	createScriptRallyPointModalFooterConfirmOnClick:function(){
 		
-
-		//首先自执行一下，就是创建之后，直接显示创建的脚本了。
-		createScriptModal.scriptNodeOnClick(scriptNode);
-		//使得刚创建的node节点处于选择状态，及先click一下。
-		$('#'+nodeId).click();
-
-
-
-		//最后取消现在的modal.
-		createScriptModal.removeCreateScriptModal();
-
+		//TODO：能够获取到名字，先获取着，看以后怎么做。
+		var name = $('#createScriptRallyPointModalBodyInput')[0].value;
+		var insertStr = '\ntRendvious("事物1")\n';
+		createScriptRallyPointModal.insertTextarea(insertStr);
+		createScriptRallyPointModal.removeCreateScriptRallyPointModal();
 	},
 
-	//点击脚本应该引起的操作。
-	scriptNodeOnClick:function(node){
-		//初始化脚本信息部分的div，然后进行监听。
-		scriptInformation.initialize();
-		$('#scriptTabs').addtabs({monitor:'.projectResourceContent'});
-	},
 
-	//creatProjectModalFooterCancel按钮click时的操作。也就是删除整个modal，这个可以公用。
-	removeCreateScriptModal:function(){
-		$("#createScriptModal").on('hidden.bs.modal',function(){
-			$('#createScriptModal').remove();
+	//删除整个modal，这个可以公用。
+	removeCreateScriptRallyPointModal:function(){
+		$('#createScriptRallyPointModal').on('hidden.bs.modal',function(){
+			$('#createScriptRallyPointModal').remove();
 		});
 	},
 

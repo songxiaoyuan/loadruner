@@ -47,7 +47,7 @@ var createScriptThingModal = {
 	createScriptThingModalHeader:function(type){
 		var modalHeader = $('<div>',{
 			'class':'modal-header',
-			'text':'添加事物'
+			'text':'添加事务'
 		});
 		return modalHeader;
 	},

@@ -130,7 +130,7 @@ var scriptInformation={
 		var addRallyPointButton = $('<button>',{
 			'text':'添加集合点',
 			'class':'buttonInLine',
-			'onclick':''
+			'onclick':'createScriptRallyPointModal.initialize()'
 		});
 		addRallyPointDiv.append(addRallyPointIcon);
 		addRallyPointDiv.append(addRallyPointButton);
@@ -175,7 +175,7 @@ var scriptInformation={
 		var runtimeSettingButton = $('<button>',{
 			'text':'运行时设置',
 			'class':'buttonInLine',
-			'onclick':''
+			'onclick':'createScriptRuntimeSettingModal.initialize()'
 		});
 		runtimeSettingDiv.append(runtimeSettingIcon);
 		runtimeSettingDiv.append(runtimeSettingButton);

@@ -371,6 +371,34 @@ body {
 .scriptParameterizationModalContent #createScriptParameterizationModalBody .createScriptParameterizationModalBodyContent .createScriptParameterizationModalBodyContentRight .rightTabContentDiv .ScriptParameterizationModalBodyContentRightDownDiv .regularExpressionClass input {
   width: 75%;
 }
+.scriptRuntimeSettingModalContent {
+  width: 750px;
+  height: 700px;
+}
+.scriptRuntimeSettingModalContent #scriptRuntimeSettingModalBody {
+  width: 730px;
+  height: 580px;
+}
+.scriptRuntimeSettingModalContent #scriptRuntimeSettingModalBody .createScriptRuntimeSettingModalBodyContent {
+  width: 100%;
+  height: 100%;
+}
+.scriptRuntimeSettingModalContent #scriptRuntimeSettingModalBody .createScriptRuntimeSettingModalBodyContent .createScriptRuntimeSettingModalBodyContentLeft {
+  width: 20%;
+  height: 100%;
+  float: left;
+  border: 1px solid #eeeeee;
+}
+.scriptRuntimeSettingModalContent #scriptRuntimeSettingModalBody .createScriptRuntimeSettingModalBodyContent .createScriptRuntimeSettingModalBodyContentRight {
+  width: 80%;
+  height: 100%;
+  float: left;
+  border: 1px solid #eeeeee;
+}
+.scriptRuntimeSettingModalContent #scriptRuntimeSettingModalBody .createScriptRuntimeSettingModalBodyContent .createScriptRuntimeSettingModalBodyContentRight .rightTabContentDiv {
+  width: 100%;
+  height: 100%;
+}
 .createScriptInformationDeatilsDiv {
   width: 100%;
   height: 920px;
