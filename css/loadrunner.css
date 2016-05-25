@@ -429,6 +429,20 @@ body {
   float: left;
   left: 7%;
 }
+.scriptRuntimeSettingModalContent #scriptRuntimeSettingModalBody .createScriptRuntimeSettingModalBodyContent .createScriptRuntimeSettingModalBodyContentRight #ScriptRuntimeSettingModalBodyContentRightLogTabContent {
+  width: 100%;
+  height: 100%;
+}
+.scriptRuntimeSettingModalContent #scriptRuntimeSettingModalBody .createScriptRuntimeSettingModalBodyContent .createScriptRuntimeSettingModalBodyContentRight #ScriptRuntimeSettingModalBodyContentRightThinkTimeTabContent {
+  width: 100%;
+  height: 100%;
+}
+.scriptRuntimeSettingModalContent #scriptRuntimeSettingModalBody .createScriptRuntimeSettingModalBodyContent .createScriptRuntimeSettingModalBodyContentRight #ScriptRuntimeSettingModalBodyContentRightThinkTimeTabContent .useThinkTimeDownDiv {
+  position: relative;
+  height: 70%;
+  width: 70%;
+  left: 10%;
+}
 .createScriptInformationDeatilsDiv {
   width: 100%;
   height: 920px;

@@ -237,7 +237,7 @@ var createScriptRuntimeSettingModal = {
 		var lastEndStartNowRadio = $('<input>',{
 			'type':'radio',
 			'name':'StepTabContentRadio',
-			'onclick':'createScriptRuntimeSettingModal.radioOnClick()',
+			'onclick':'createScriptRuntimeSettingModal.stepTabContentRadioOnClick()',
 			'value':'1',
 			'checked':'true'
 		});
@@ -253,7 +253,7 @@ var createScriptRuntimeSettingModal = {
 		var lastEndRadio = $('<input>',{
 			'type':'radio',
 			'name':'StepTabContentRadio',
-			'onclick':'createScriptRuntimeSettingModal.radioOnClick()',
+			'onclick':'createScriptRuntimeSettingModal.stepTabContentRadioOnClick()',
 			'value':'2',
 		});
 		var lastEndLable=$('<label>',{
@@ -271,7 +271,7 @@ var createScriptRuntimeSettingModal = {
 		var lastStartRadio = $('<input>',{
 			'type':'radio',
 			'name':'StepTabContentRadio',
-			'onclick':'createScriptRuntimeSettingModal.radioOnClick()',
+			'onclick':'createScriptRuntimeSettingModal.stepTabContentRadioOnClick()',
 			'value':'3',
 		});
 		var lastStartLable=$('<label>',{
@@ -289,7 +289,7 @@ var createScriptRuntimeSettingModal = {
 		return ret;
 	},
 
-	radioOnClick:function() {
+	stepTabContentRadioOnClick:function() {
 		var selectRadio = $('#ScriptRuntimeSettingModalBodyContentRightStepTabContent input:radio:checked').val();
 		if (selectRadio == '2') {
 			//表示点击的是上一次循环结束后，将里面的select和input变得可以编辑，别的select和input不能编辑
@@ -404,27 +404,269 @@ var createScriptRuntimeSettingModal = {
 		var ret = $('<div>',{
 			'class':'rightTabContentDiv tab-pane fade',
 			'id':'ScriptRuntimeSettingModalBodyContentRightLogTabContent',
-			'text':'ScriptRuntimeSettingModalBodyContentRightLogTabContent'
 		});
+
+		var recordLogDiv = $('<div>',{
+			'class':'recordLogDiv'
+		});
+		var recordLogCheckbox = $('<input>',{
+			'type':'checkbox',
+			'onclick':'createScriptRuntimeSettingModal.logTabContentCheckBoxOnClick()',
+			'checked':'true'
+		});
+		var recordLogCheckboxLable=$('<label>',{
+			'text':'记录日志'
+		});
+		recordLogDiv.append(recordLogCheckbox);
+		recordLogDiv.append(recordLogCheckboxLable);
+
+		var onlyRecordWrongMessageDiv = $('<div>',{
+			'class':'onlyRecordWrongMessage'
+		});
+		var onlyRecordWrongMessageRadio = $('<input>',{
+			'type':'radio',
+			'name':'recordWhatLogMessage',
+			'value':'1',
+			'checked':'true'
+		});
+		var onlyRecordWrongMessageLable=$('<label>',{
+			'text':'仅记录错误信息'
+		});
+		onlyRecordWrongMessageDiv.append(onlyRecordWrongMessageRadio);
+		onlyRecordWrongMessageDiv.append(onlyRecordWrongMessageLable);
+
+		var recordWrongMessageAndParameterDiv = $('<div>',{
+			'class':'recordWrongMessageAndParameter'
+		});
+		var recordWrongMessageAndParameterRadio = $('<input>',{
+			'type':'radio',
+			'name':'recordWhatLogMessage',
+			'value':'2',
+		});
+		var recordWrongMessageAndParameterLable=$('<label>',{
+			'text':'记录错误信息和参数值'
+		});
+		recordWrongMessageAndParameterDiv.append(recordWrongMessageAndParameterRadio);
+		recordWrongMessageAndParameterDiv.append(recordWrongMessageAndParameterLable);
+
+		var recordAllRunMessageDiv = $('<div>',{
+			'class':'lastEndStartNow'
+		});
+		var recordAllRunMessageRadio = $('<input>',{
+			'type':'radio',
+			'name':'recordWhatLogMessage',
+			'value':'3',
+		});
+		var recordAllRunMessageLable=$('<label>',{
+			'text':'记录运行中的全部信息'
+		});
+		recordAllRunMessageDiv.append(recordAllRunMessageRadio);
+		recordAllRunMessageDiv.append(recordAllRunMessageLable);
+
+		ret.append(recordLogDiv);
+		ret.append(onlyRecordWrongMessageDiv);
+		ret.append(recordWrongMessageAndParameterDiv);
+		ret.append(recordAllRunMessageDiv);
 
 		return ret;
 	},
+
+	logTabContentCheckBoxOnClick:function() {
+		if ($('#ScriptRuntimeSettingModalBodyContentRightLogTabContent').find('input[type="checkbox"]').is(':checked')) {
+			$('#ScriptRuntimeSettingModalBodyContentRightLogTabContent').find('input[name="recordWhatLogMessage"]').attr('disabled',false);
+		}
+		else{
+			$('#ScriptRuntimeSettingModalBodyContentRightLogTabContent').find('input[name="recordWhatLogMessage"]').attr('disabled',true);
+		}
+	},
+
 	createRightThinkTimeTabContent:function() {
 		var ret = $('<div>',{
 			'class':'rightTabContentDiv tab-pane fade',
 			'id':'ScriptRuntimeSettingModalBodyContentRightThinkTimeTabContent',
-			'text':'ScriptRuntimeSettingModalBodyContentRightThinkTimeTabContent'
 		});
 
+		var ignoreThinkTimeDiv = $('<div>',{
+			'class':'ignoreThinkTimeDiv'
+		});
+		var ignoreThinkTimeRadio = $('<input>',{
+			'type':'radio',
+			'onclick':'createScriptRuntimeSettingModal.thinkTimeTabContentRadioOnClick()',
+			'value':'1',
+			'name':'thinkTimeType'
+		});
+		var ignoreThinkTimeLable=$('<label>',{
+			'text':'忽略思考时间'
+		});
+		ignoreThinkTimeDiv.append(ignoreThinkTimeRadio);
+		ignoreThinkTimeDiv.append(ignoreThinkTimeLable);
+
+		var useThinkTimeDiv = $('<div>',{
+			'class':'useThinkTimeDiv'
+		});
+		var useThinkTimeRadio = $('<input>',{
+			'type':'radio',
+			'onclick':'createScriptRuntimeSettingModal.thinkTimeTabContentRadioOnClick()',
+			'name':'thinkTimeType',
+			'value':'2',
+			'checked':'true'
+		});
+		var useThinkTimeLable=$('<label>',{
+			'text':'使用思考时间'
+		});
+		useThinkTimeDiv.append(useThinkTimeRadio);
+		useThinkTimeDiv.append(useThinkTimeLable);
+
+		var useThinkTimeDownDiv = $('<div>',{
+			'class':'useThinkTimeDownDiv'
+		});
+
+		var accordTimerDiv = $('<div>',{
+			'class':'accordTimerDiv'
+		});
+		var accordTimerRadio = $('<input>',{
+			'type':'radio',
+			'name':'useThinkTimeType',
+			'checked':'true'
+		});
+		var accordTimerLable=$('<label>',{
+			'text':'与计数器一致'
+		});
+		accordTimerDiv.append(accordTimerRadio);
+		accordTimerDiv.append(accordTimerLable);
+
+		var fixedValueTimeDiv = $('<div>',{
+			'class':'fixedValueTimeDiv'
+		});
+		var fixedValueTimeRadio = $('<input>',{
+			'type':'radio',
+			'name':'useThinkTimeType',
+		});
+		var fixedValueTimeLable=$('<label>',{
+			'text':'固定值'
+		});
+		var fixedValueTimeInput=$('<input>',{
+			'type':'text'
+		});
+		var fixedValueTimeLable2=$('<label>',{
+			'text':'秒'
+		});
+		fixedValueTimeDiv.append(fixedValueTimeRadio);
+		fixedValueTimeDiv.append(fixedValueTimeLable);
+		fixedValueTimeDiv.append(fixedValueTimeInput);
+		fixedValueTimeDiv.append(fixedValueTimeLable2);
+
+		var accordTimerPercentDiv = $('<div>',{
+			'class':'accordTimerPercentDiv'
+		});
+		var accordTimerPercentRadio = $('<input>',{
+			'type':'radio',
+			'name':'useThinkTimeType',
+		});
+		var accordTimerPercentLable=$('<label>',{
+			'text':'使用思考时间'
+		});
+
+		var accordTimerPercentInputDiv=$('<div>',{
+			'class':'accordTimerPercentInputDiv'
+		});
+		var accordTimerPercentInputInput1=$('<input>',{
+			'type':'text'
+		});
+		var accordTimerPercentInputLabel1=$('<label>',{
+			'text':'% 至'
+		});
+		var accordTimerPercentInputInput2=$('<input>',{
+			'type':'text'
+		});
+		var accordTimerPercentInputLabel2=$('<label>',{
+			'text':'%'
+		});
+		accordTimerPercentInputDiv.append(accordTimerPercentInputInput1);
+		accordTimerPercentInputDiv.append(accordTimerPercentInputLabel1);
+		accordTimerPercentInputDiv.append(accordTimerPercentInputInput2);
+		accordTimerPercentInputDiv.append(accordTimerPercentInputLabel2);
+
+		accordTimerPercentDiv.append(accordTimerPercentRadio);
+		accordTimerPercentDiv.append(accordTimerPercentLable);
+		accordTimerPercentDiv.append(accordTimerPercentInputDiv);
+
+		useThinkTimeDownDiv.append(accordTimerDiv);
+		useThinkTimeDownDiv.append(fixedValueTimeDiv);
+		useThinkTimeDownDiv.append(accordTimerPercentDiv);
+
+
+		ret.append(ignoreThinkTimeDiv);
+		ret.append(useThinkTimeDiv);
+		ret.append(useThinkTimeDownDiv);
 		return ret;
 	},
+
+	thinkTimeTabContentRadioOnClick:function() {
+		var selectRadio = $('#ScriptRuntimeSettingModalBodyContentRightThinkTimeTabContent input:radio:checked').val();
+		var operationDiv = $('#ScriptRuntimeSettingModalBodyContentRightThinkTimeTabContent > .useThinkTimeDownDiv');
+		if (selectRadio == '1') {
+			//表示点击的是忽略思考时间，将里面的select和input变得可以不能编辑
+			operationDiv.find('select').attr('disabled',true);
+			operationDiv.find('input').attr('disabled',true);
+		}
+		else{
+			operationDiv.find('select').attr('disabled',false);
+			operationDiv.find('input').attr('disabled',false);
+		}
+	},
+
 	createRightErrorHandingTabContent:function() {
 		var ret = $('<div>',{
 			'class':'rightTabContentDiv tab-pane fade',
 			'id':'ScriptRuntimeSettingModalBodyContentRightErrorHandingTabContent',
-			'text':'ScriptRuntimeSettingModalBodyContentRightErrorHandingTabContent'
 		});
 
+		var runOccurError = $('<div>',{
+			'class':'runOccurError',
+			'text':'运行发生错误时'
+		});
+
+		var continueRunDiv = $('<div>',{
+			'class':'continueRunDiv'
+		});
+		var continueRunCheckbox = $('<input>',{
+			'type':'checkbox',
+		});
+		var continueRunLable=$('<label>',{
+			'text':'继续运行'
+		});
+		continueRunDiv.append(continueRunCheckbox);
+		continueRunDiv.append(continueRunLable);
+
+		var stopAndRecordLogDiv = $('<div>',{
+			'class':'stopAndRecordLogDiv'
+		});
+		var stopAndRecordLogCheckbox = $('<input>',{
+			'type':'checkbox',
+		});
+		var stopAndRecordLogLable=$('<label>',{
+			'text':'终止并记录日志'
+		});
+		stopAndRecordLogDiv.append(stopAndRecordLogCheckbox);
+		stopAndRecordLogDiv.append(stopAndRecordLogLable);
+
+		var savePageSnapShootDiv = $('<div>',{
+			'class':'continueRunDiv'
+		});
+		var savePageSnapShootCheckbox = $('<input>',{
+			'type':'checkbox',
+		});
+		var savePageSnapShootLable=$('<label>',{
+			'text':'保存页面快照'
+		});
+		savePageSnapShootDiv.append(savePageSnapShootCheckbox);
+		savePageSnapShootDiv.append(savePageSnapShootLable);
+
+		ret.append(runOccurError);
+		ret.append(continueRunDiv);
+		ret.append(stopAndRecordLogDiv);
+		ret.append(savePageSnapShootDiv);
 		return ret;
 	},
 	createRightProxySettingTabContent:function() {
