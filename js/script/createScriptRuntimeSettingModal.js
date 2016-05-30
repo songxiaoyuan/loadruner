@@ -673,9 +673,127 @@ var createScriptRuntimeSettingModal = {
 		var ret = $('<div>',{
 			'class':'rightTabContentDiv tab-pane fade',
 			'id':'ScriptRuntimeSettingModalBodyContentRightProxySettingTabContent',
-			'text':'ScriptRuntimeSettingModalBodyContentRightProxySettingTabContent'
 		});
 
+		var dontUseProxyDiv = $('<div>',{
+			'class':'proxySettingTabContentRadioDiv'
+		});
+		var dontUseProxyRadio = $('<input>',{
+			'type':'radio',
+			'value':'1',
+			'name':'proxySettingTabContentUseType'
+		});
+		var dontUseProxyLable=$('<label>',{
+			'text':'不使用代理'
+		});
+		dontUseProxyDiv.append(dontUseProxyRadio);
+		dontUseProxyDiv.append(dontUseProxyLable);
+
+		var automaticTestingProxyDiv = $('<div>',{
+			'class':'proxySettingTabContentRadioDiv'
+		});
+		var automaticTestingProxyRadio = $('<input>',{
+			'type':'radio',
+			'value':'2',
+			'name':'proxySettingTabContentUseType'
+		});
+		var automaticTestingProxyLable=$('<label>',{
+			'text':'自动检测代理'
+		});
+		automaticTestingProxyDiv.append(automaticTestingProxyRadio);
+		automaticTestingProxyDiv.append(automaticTestingProxyLable);
+
+		var useSystemProxySettingDiv = $('<div>',{
+			'class':'proxySettingTabContentRadioDiv'
+		});
+		var useSystemProxySettingRadio = $('<input>',{
+			'type':'radio',
+			'value':'3',
+			'name':'proxySettingTabContentUseType'
+		});
+		var useSystemProxySettingLable=$('<label>',{
+			'text':'使用系统代理设置'
+		});
+		useSystemProxySettingDiv.append(useSystemProxySettingRadio);
+		useSystemProxySettingDiv.append(useSystemProxySettingLable);
+
+		var manualSettingProxyDiv = $('<div>',{
+			'class':'proxySettingTabContentRadioDiv'
+		});
+		var manualSettingProxyRadio = $('<input>',{
+			'type':'radio',
+			'value':'4',
+			'name':'proxySettingTabContentUseType'
+		});
+		var manualSettingProxyLable=$('<label>',{
+			'text':'手动配置代理'
+		});
+		manualSettingProxyDiv.append(manualSettingProxyRadio);
+		manualSettingProxyDiv.append(manualSettingProxyLable);
+
+		var proxySettingDownDiv = $('<div>',{
+			'class':'proxySettingDownDiv'
+		});
+
+		for (var i = 0; i <4; i++) {
+			var linDiv =$('<div>',{
+				'class':'proxySettingInputLineDiv'
+			});
+			var label1 = $('<label>',{
+				'text':'HTTP代理'
+			});
+			var input1 = $('<input>',{
+				'type':'text'
+			});
+			var label2 = $('<label>',{
+				'text':'端口'
+			});
+			var input2 = $('<input>',{
+				'type':'text'
+			});
+			switch(i){
+				case 0:
+					console.log('iiiiiiiiiiiiiiiiiiiiii');
+					label1[0].innerText='HTTP代理';
+					break;
+				case 1:
+					label1[0].innerText='SSL代理';
+					break;
+				case 2:
+					label1[0].innerText='FTP代理';
+					break;
+				case 3:
+					label1[0].innerText='Socks代理';
+					break;
+				default:
+				    break;
+
+			}
+			linDiv.append(label1);
+			linDiv.append(input1);
+			linDiv.append(label2);
+			linDiv.append(input2);
+
+			proxySettingDownDiv.append(linDiv);
+		}
+
+		var proxyCheckBoxDiv = $('<div>',{
+		});
+		var proxyCheckBox = $('<input>',{
+			'type':'checkbox',
+		});
+		var proxyCheckBoxLable=$('<label>',{
+			'text':'为所有协议使用相同的代理'
+		});
+		proxyCheckBoxDiv.append(proxyCheckBox);
+		proxyCheckBoxDiv.append(proxyCheckBoxLable);
+		proxySettingDownDiv.append(proxyCheckBoxDiv);
+
+		ret.append(dontUseProxyDiv);
+		ret.append(automaticTestingProxyDiv);
+		ret.append(useSystemProxySettingDiv);
+		ret.append(manualSettingProxyDiv);
+		ret.append(proxySettingDownDiv);
 		return ret;
 	},
 	createRightBrowserCacheTabContent:function() {

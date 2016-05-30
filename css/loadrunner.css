@@ -443,6 +443,19 @@ body {
   width: 70%;
   left: 10%;
 }
+.scriptRuntimeSettingModalContent #scriptRuntimeSettingModalBody .createScriptRuntimeSettingModalBodyContent .createScriptRuntimeSettingModalBodyContentRight #ScriptRuntimeSettingModalBodyContentRightProxySettingTabContent {
+  width: 100%;
+  height: 100%;
+}
+.scriptRuntimeSettingModalContent #scriptRuntimeSettingModalBody .createScriptRuntimeSettingModalBodyContent .createScriptRuntimeSettingModalBodyContentRight #ScriptRuntimeSettingModalBodyContentRightProxySettingTabContent .proxySettingTabContentRadioDiv {
+  width: 100%;
+}
+.scriptRuntimeSettingModalContent #scriptRuntimeSettingModalBody .createScriptRuntimeSettingModalBodyContent .createScriptRuntimeSettingModalBodyContentRight #ScriptRuntimeSettingModalBodyContentRightProxySettingTabContent .proxySettingDownDiv {
+  position: relative;
+  height: 70%;
+  width: 80%;
+  left: 10%;
+}
 .createScriptInformationDeatilsDiv {
   width: 100%;
   height: 920px;
