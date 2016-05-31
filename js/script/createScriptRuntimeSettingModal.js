@@ -753,7 +753,6 @@ var createScriptRuntimeSettingModal = {
 			});
 			switch(i){
 				case 0:
-					console.log('iiiiiiiiiiiiiiiiiiiiii');
 					label1[0].innerText='HTTP代理';
 					break;
 				case 1:
@@ -800,17 +799,112 @@ var createScriptRuntimeSettingModal = {
 		var ret = $('<div>',{
 			'class':'rightTabContentDiv tab-pane fade',
 			'id':'ScriptRuntimeSettingModalBodyContentRightBrowserCacheTabContent',
-			'text':'ScriptRuntimeSettingModalBodyContentRightBrowserCacheTabContent'
 		});
 
+		var clearCacheEveryTimeDiv = $('<div>',{
+			'class':'browserCacheTabContentRadioDiv'
+		});
+		var clearCacheEveryTimeRadio = $('<input>',{
+			'type':'radio',
+			'value':'1',
+			'name':'browserCacheTabContentUseType'
+		});
+		var clearCacheEveryTimeLable=$('<label>',{
+			'text':'每次迭代时清除缓存'
+		});
+		clearCacheEveryTimeDiv.append(clearCacheEveryTimeRadio);
+		clearCacheEveryTimeDiv.append(clearCacheEveryTimeLable);
+
+		var useBrowserCacheDiv = $('<div>',{
+			'class':'browserCacheTabContentRadioDiv'
+		});
+		var useBrowserCacheRadio = $('<input>',{
+			'type':'radio',
+			'value':'2',
+			'name':'browserCacheTabContentUseType'
+		});
+		var useBrowserCacheLable=$('<label>',{
+			'text':'使用已有缓存'
+		});
+		useBrowserCacheDiv.append(useBrowserCacheRadio);
+		useBrowserCacheDiv.append(useBrowserCacheLable);
+
+
+		var browserCacheDownDiv = $('<div>',{
+			'class':'browserCacheDownDiv'
+		});
+
+		var saveNotHTMLToCacheDiv = $('<div>',{
+			'class':'saveNotHTMLToCacheDiv'
+		});
+		var saveNotHTMLToCacheCheckbox = $('<input>',{
+			'type':'checkbox',
+		});
+		var saveNotHTMLToCacheLable=$('<label>',{
+			'text':'将非HTML元素保存至缓存'
+		});
+		saveNotHTMLToCacheDiv.append(saveNotHTMLToCacheCheckbox);
+		saveNotHTMLToCacheDiv.append(saveNotHTMLToCacheLable);
+
+		var updatePageCacheDiv = $('<div>',{
+			'class':'updatePageCacheDiv'
+		});
+		var updatePageCacheCheckbox = $('<input>',{
+			'type':'checkbox',
+		});
+		var updatePageCacheLable=$('<label>',{
+			'text':'每次用户访问时更新页面缓存'
+		});
+		updatePageCacheDiv.append(updatePageCacheCheckbox);
+		updatePageCacheDiv.append(updatePageCacheLable);
+
+		browserCacheDownDiv.append(saveNotHTMLToCacheDiv);
+		browserCacheDownDiv.append(updatePageCacheDiv);
+
+
+		ret.append(clearCacheEveryTimeDiv);
+		ret.append(useBrowserCacheDiv);
+		ret.append(browserCacheDownDiv);
 		return ret;
 	},
 	createRightTimeOutTabContent:function() {
 		var ret = $('<div>',{
 			'class':'rightTabContentDiv tab-pane fade',
 			'id':'ScriptRuntimeSettingModalBodyContentRightTimeOutTabContent',
-			'text':'timeout'
 		});
+
+		for (var i = 0; i <4; i++) {
+			var linDiv =$('<div>',{
+				'class':'timeOutInputLineDiv'
+			});
+			var label1 = $('<label>',{
+				'text':'HTTP-request connect timeout(sec)'
+			});
+			var input1 = $('<input>',{
+				'type':'text'
+			});
+			switch(i){
+				case 0:
+					label1[0].innerText='HTTP-request connect timeout(sec)';
+					break;
+				case 1:
+					label1[0].innerText='HTTP-request receive timeout(sec)';
+					break;
+				case 2:
+					label1[0].innerText='HTTP Keep-Alive timeout(sec)';
+					break;
+				case 3:
+					label1[0].innerText='step download timeout(sec)';
+					break;
+				default:
+				    break;
+
+			}
+			linDiv.append(label1);
+			linDiv.append(input1);
+
+			ret.append(linDiv);
+		} 
 
 		return ret;
 	},
