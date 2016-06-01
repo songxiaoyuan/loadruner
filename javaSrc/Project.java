@@ -29,7 +29,8 @@ public class Project {
       System.out.println("author = " + object.get("author").getAsString());
       System.out.println("date = " + object.get("date").getAsString());
       System.out.println("comments = " + object.get("comments").getAsString());
-
+      //1. write data into .proj file.
+      //2. 4 dirs
       
       /*
       // 遍历JSON数组
