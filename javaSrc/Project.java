@@ -7,14 +7,14 @@ public class Project {
   }
 
   /*
-  jsonStr: the JSON String from the frontend. It may look like the following format:
-	  {
-		  "projectName": "Project Name from frontend",
-		  "savedPath": "Saved path from frontend",
-		  "author": "author of the project",
-		  "date": "date of the creation",
-		  "comments": "comments of the project"
-	  }
+  jsonStr: the JSON String from the frontend. It may look like as follows:
+  {
+	  "projectName": "Project Name from frontend",
+	  "savedPath": "Saved path from frontend",
+	  "author": "author of the project",
+	  "date": "date of the creation",
+	  "comments": "comments of the project"
+  
   */
   public void createProject(String jsonStr) {
       //TODO: When create a new project, we must ask the user if it is ok to close current project.
@@ -30,6 +30,7 @@ public class Project {
       System.out.println("date = " + object.get("date").getAsString());
       System.out.println("comments = " + object.get("comments").getAsString());
 
+      
       /*
       // 遍历JSON数组
       JsonArray languages = object.getAsJsonArray("languages");
