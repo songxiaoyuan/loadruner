@@ -9,7 +9,7 @@ var newProjectModal = {
 			$("#newprojectModal").modal("show");			
 		}
 
-		//TODO:快速进入脚本页面,不用了之后要删去。
+		// //TODO:快速进入脚本页面,不用了之后要删去。
 		// $('#creatProjectButton').click();
 		// $('#creatProjectModalFooterConfirm').click();
 	},
