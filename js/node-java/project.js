@@ -17,11 +17,16 @@ var project = new Project();
 
 //Create Project.
 //TODO: the jsonString should be from the frontend.
-var jsonString = "{\"projectName\": \"Project Name from frontend\", " + 
-				 "\"savedPath\": \"Saved path from frontend\", " + 
-				 "\"author\": \"author of the project\", " + 
-				 "\"date\": \"date of the creation\", " + 
-				 "\"comments\": \"comments of the project\"}";
-project.createProjectSync(jsonString);
+
+var projectJson = {}
+projectJson.projectName = "Project1"
+projectJson.savedPath = "/home/sxy/tmp/"
+projectJson.author = "author of the project"
+projectJson.date = "date of the creation"
+projectJson.comments = "comments of the project"
+
+var projectJsonString = JSON.stringify(projectJson)
+
+project.createProjectSync(projectJsonString);
 console.log("Project is created.");
 
