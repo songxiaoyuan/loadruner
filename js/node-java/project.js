@@ -5,8 +5,9 @@ var java = require('java');
 //lxw: NOTE here, the current working directory is the directory of file(aka. index.html) calling project.js instead of the directory of "project.js".
 //java.classpath.push("../../bin")	//NO   cannot find the class Project.
 java.classpath.push("bin");
-//TODO: how to push jar files into classpath.
-java.classpath.push("/home/lxw/IT/program/eclipseJava/GSONDemo/bin/thirdpartyJARs/gson-2.3.1.jar");
+//push jar files into classpath.
+//lxw NOTE: must restrict to the jar file, intead of the directory.
+java.classpath.push("bin/thirdPartyJARs/gson-2.3.1.jar");
 
 console.log("Start importing.");
 var Project = java.import('Project');
