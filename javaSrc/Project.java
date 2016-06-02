@@ -24,7 +24,7 @@ public class Project {
 	private List<Scene> scenes;
 	private List<Script> scripts;
 	
-	//Singleton
+	//Singleton	//系统中永远只有一个项目
 	private Project(){}
 	private static final Project project = new Project();
 	public static Project getInstance(){
@@ -35,7 +35,7 @@ public class Project {
 		System.out.println("lxw");
 		/*
 		Project proj = new Project();
-		proj.genXMLProjFile();
+		proj.writeXMLProjFile();
 		*/
 	}
 
@@ -69,12 +69,12 @@ public class Project {
 		this.project.comments = object.get("comments").getAsString();
 		
 		// 1. Write data into .proj file.
-		this.genXMLProjFile();
+		this.writeXMLProjFile();
 		// 2. Create 4 dirs
 		this.mkFourDirs();
 
 	}
-	public void genXMLProjFile(){
+	public void writeXMLProjFile(){
 		//TODO: 把判断用户输入的数据是否合法的任务交给前端来做
 		try {
 			XStream xstream = new XStream(new StaxDriver());
@@ -94,6 +94,10 @@ public class Project {
 		}
 	}
 
+	public void readXMLProjFile(){
+		//initialize the value of data members in Project
+	}
+	
 	public void mkFourDirs() {
 		try {
 			String projPath = this.project.savedPath + File.separator;
@@ -119,13 +123,21 @@ public class Project {
 		}
 	}
 	
+	public void importFourDirs(){
+		
+	}
+	
 	public void openProject() {
 		// TODO: When open a project, we must ask the user if it is ok to close the current project.
 	}
 
-	public void importProject() {
+	public void importProject(String projPath) {
 		// TODO: When open a project, we must ask the user if it is ok to close the current project.
 		
+		clearPrevProject();
+		readXMLProjFile();
+		//加载四个文件夹及文件夹中的内容
+		//importFourDirs();
 	}
 
 	public void editProject() {
@@ -138,5 +150,11 @@ public class Project {
 	
 	public void saveProject(){
 		//把要保存的项目内容以json的形式传过来？
+	}
+	
+	//项目切换时，由于系统中只有一个项目对象，因此需要将旧的项目的信息清空一下
+	public void clearPrevProject(){
+		//TODO: clear the previous project info.
+		//注意：只修改内存中的数据(Project类)，不能修改硬盘上(上一个项目存储位置)的数据
 	}
 }
