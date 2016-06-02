@@ -7,21 +7,20 @@ var java = require('java');
 java.classpath.push("bin");
 //push jar files into classpath.
 //lxw NOTE: must restrict to the jar file, intead of the directory.
-java.classpath.push("bin/thirdPartyJARs/gson-2.3.1.jar");
+java.classpath.push("javaSrc/thirdPartyJARs/gson-2.3.1.jar");
+java.classpath.push("javaSrc/thirdPartyJARs/xstream-1.4.9.jar");
 
-console.log("Start importing.");
 var Project = java.import('Project');
-console.log("End importing.");
 
-var project = new Project();
+//var project = new Project();
+var project = Project.getInstanceSync();
 
 //Create Project.
 //TODO: the jsonString should be from the frontend.
-var jsonString = "{\"projectName\": \"Project Name from frontend\", " + 
-				 "\"savedPath\": \"Saved path from frontend\", " + 
-				 "\"author\": \"author of the project\", " + 
-				 "\"date\": \"date of the creation\", " + 
-				 "\"comments\": \"comments of the project\"}";
+var jsonString = "{\"projectName\": \"DWL\", " + 
+				 "\"savedPath\": \"/home/lxw/DWLProj\", " + 
+				 "\"author\": \"lxw\", " + 
+				 "\"date\": \"2016.06.02\", " + 
+				 "\"comments\": \"No comments\"}";
 project.createProjectSync(jsonString);
 console.log("Project is created.");
-
