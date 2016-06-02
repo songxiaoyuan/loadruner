@@ -4,12 +4,56 @@
   <head>
     <meta charset="UTF-8">
     <title>loadRunner</title>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="./css/loadrunner.css">
+    <link rel="stylesheet" type="text/css" href="./css/datepicker.css">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap-addtabs.css">
+<!--     <link rel="stylesheet" type="text/css" href="./css/tree.css"> -->
+    
     <script  >
-      window.$ = window.jQuery = require('./js/jquery.min.js');
+      window.$ = window.jQuery = require('./js/lib/jquery.js');
     </script>
-    <script src="./js/bootstrap.js"></script>    
+    <script src="./js/lib/bootstrap.js"></script> 
+    <script src="./js/lib/bootstrap-datepicker.js" charset="UTF-8"></script>
+    <script src="./js/lib/bootstrap-addtabs.js" charset="UTF-8"></script>
+    <script src="./js/lib/bootstrap-treeview.js" charset="UTF-8"></script>
+     <script src="./js/lib/json2.js" charset="UTF-8"></script>
+    <script src="./js/appData/appData.js"></script>
+    <script src="./js/projectStructure.js"></script>
+    <script src="./js/project/projectDescription.js"></script>
+    <script src="./js/project/createProjectModalPage.js"></script>
+    <script src="./js/project/creatProjectFromExistedModalPage.js"></script>
+    <script src="./js/project/newProjectModal.js"></script>
+    <script src="./js/script/scriptInformation.js"></script>
+    <script src="./js/script/createScriptModal.js"></script>
+    <script src="./js/script/setParameter.js"></script>
+    <script src="./js/script/createScriptParameterizationModal.js"></script>
+    <script src="./js/script/createScriptCorrelationModal.js"></script>
+    <script src="./js/script/createScriptRallyPointModal.js"></script>
+    <script src="./js/script/createScriptRuntimeSettingModal.js"></script>
+    <script src="./js/script/createScriptThingModal.js"></script>
+    <script src="./js/script/scriptMain.js"></script>
+    <script src="./js/menubar/fileli.js"></script> 
+    <script src="./js/menubar/editli.js"></script> 
+    <script src="./js/menubar/projectli.js"></script> 
+    <script src="./js/menubar/viewli.js"></script> 
+    <script src="./js/menubar/scriptli.js"></script> 
+    <script src="./js/menubar/sceneResultli.js"></script> 
+    <script src="./js/menubar/reportli.js"></script> 
+    <script src="./js/menubar/configManagementli.js"></script> 
+    <script src="./js/menubar/helpli.js"></script> `
+    <script src="./js/menubar/menubar.js"></script>     
+    <!-- lxw -->
+    <script src="./js/node-java/project.js"></script>     
   <body>
-    <h1>loadRunner</h1>
-     <div>hello</div>
+    <div id="container">
+    	<div id="menubar"></div>
+    	<div id="Structure">
+         <div id="projectInformation"></div>
+         <div id="projectResource"></div>   
+        </div>
+    	<div id="Description"></div>
+    </div>
+    <script src="./js/main.js"></script>
   </body>
 </html>
