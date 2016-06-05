@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.google.gson.*;
 import com.thoughtworks.xstream.XStream;
@@ -24,9 +25,10 @@ public class Project {
 	private List<Scene> scenes;
 	private List<Script> scripts;
 	
-	//Singleton	//系统中永远只有一个项目
+	//Singleton	//系统中永远只有一个项目(处于使用中的项目)
 	private Project(){}
 	private static final Project project = new Project();
+	private static final Logger log = MyLogger.getInstance();
 	public static Project getInstance(){
 		return project;
 	}
@@ -55,18 +57,18 @@ public class Project {
 		JsonObject object = (JsonObject) parser.parse(jsonStr);
 
 		// 使用JsonObject的get(String memeberName)方法返回JsonElement，再使用JsonElement的getAs*方法得到真实类型
-		this.project.projectName = object.get("projectName").getAsString();
-		this.project.savedPath = object.get("savedPath").getAsString();
-		this.project.author = object.get("author").getAsString();
+		project.projectName = object.get("projectName").getAsString();
+		project.savedPath = object.get("savedPath").getAsString();
+		project.author = object.get("author").getAsString();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
 		try{
-			this.project.date = df.parse(object.get("date").getAsString());
+			project.date = df.parse(object.get("date").getAsString());
 			//System.out.print(this.date);
 		}
 		catch(ParseException e){
-			e.printStackTrace();
+			log.warning(e.getMessage());
 		}
-		this.project.comments = object.get("comments").getAsString();
+		project.comments = object.get("comments").getAsString();
 		
 		// 1. Write data into .proj file.
 		this.writeXMLProjFile();
@@ -78,11 +80,12 @@ public class Project {
 		//TODO: 把判断用户输入的数据是否合法的任务交给前端来做
 		try {
 			XStream xstream = new XStream(new StaxDriver());
-			File projDir = new File(this.project.savedPath);
+			File projDir = new File(project.savedPath);
 			if(!projDir.exists()){
 				projDir.mkdirs();
 			}
-			File projFile = new File(this.project.savedPath + File.separator + ".project");
+			File projFile = new File(project.savedPath + File.separator + ".project");
+			//if(!projFile.exists()){}	//这种判断应该尽可能地放到前端，减少前后端交互的次数。而且提高效率。
 			OutputStream out = new BufferedOutputStream(new FileOutputStream(projFile));
 			//自动清空文件
 			out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
@@ -90,7 +93,8 @@ public class Project {
 			//自动清空文件
 			xstream.marshal(project, new PrettyPrintWriter(new OutputStreamWriter(out)));
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			log.warning(e.getMessage());
 		}
 	}
 
@@ -100,26 +104,27 @@ public class Project {
 	
 	public void mkFourDirs() {
 		try {
-			String projPath = this.project.savedPath + File.separator;
+			String prefix = project.savedPath + File.separator;
 			
-			File projDir = new File(projPath + "script");
+			File projDir = new File(prefix + "script");
 			if (!projDir.exists()) {
 				projDir.mkdirs();
 			}
-			projDir = new File(projPath + "scene");
+			projDir = new File(prefix + "scene");
 			if (!projDir.exists()) {
 				projDir.mkdirs();
 			}
-			projDir = new File(projPath + "result");
+			projDir = new File(prefix + "result");
 			if (!projDir.exists()) {
 				projDir.mkdirs();
 			}
-			projDir = new File(projPath + "report");
+			projDir = new File(prefix + "report");
 			if (!projDir.exists()) {
 				projDir.mkdirs();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			log.warning(e.getMessage());
 		}
 	}
 	
