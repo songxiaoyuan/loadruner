@@ -23,4 +23,8 @@ var jsonString = "{\"projectName\": \"DWL\", " +
 				 "\"date\": \"2016.06.02\", " + 
 				 "\"comments\": \"No comments\"}";
 project.createProjectSync(jsonString);
-console.log("Project is created.");
+console.log("Project is created successfully.");
+
+//Load Project.
+project.importProjectSync("/home/lxw/DWLProj");
+console.log("Project is imported successfully.");

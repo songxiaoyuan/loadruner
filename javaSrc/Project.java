@@ -35,10 +35,6 @@ public class Project {
 
 	public static final void main(String[] args) {
 		System.out.println("lxw");
-		/*
-		Project proj = new Project();
-		proj.writeXMLProjFile();
-		*/
 	}
 
 	/*
@@ -85,7 +81,7 @@ public class Project {
 				projDir.mkdirs();
 			}
 			File projFile = new File(project.savedPath + File.separator + ".project");
-			//if(!projFile.exists()){}	//这种判断应该尽可能地放到前端，减少前后端交互的次数。而且提高效率。
+			//if(!projFile.isFile()){}	//这种判断应该尽可能地放到前端，减少前后端交互的次数。而且提高效率。
 			OutputStream out = new BufferedOutputStream(new FileOutputStream(projFile));
 			//自动清空文件
 			out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
@@ -98,8 +94,22 @@ public class Project {
 		}
 	}
 
-	public void readXMLProjFile(){
+	public int readXMLProjFile(String projPath){
 		//initialize the value of data members in Project
+		File projDir = new File(projPath);
+		File projFile = new File(projPath + File.separator + ".project");
+		if(!projDir.isDirectory() || !projFile.isFile()){
+			return -1;	//Error
+		}
+		
+		try {
+			XStream xstream = new XStream(new StaxDriver());
+			Project projTemp = (Project)xstream.fromXML(projFile);
+			showProject(projTemp);
+		} catch (Exception e) {
+			log.warning(e.getMessage());
+		}
+		return 0;	//Correct
 	}
 	
 	public void mkFourDirs() {
@@ -128,7 +138,7 @@ public class Project {
 		}
 	}
 	
-	public void importFourDirs(){
+	public void importFourDirs(String projPath){
 		
 	}
 	
@@ -138,28 +148,40 @@ public class Project {
 
 	public void importProject(String projPath) {
 		// TODO: When open a project, we must ask the user if it is ok to close the current project.
-		
 		clearPrevProject();
-		readXMLProjFile();
+		readXMLProjFile(projPath);
 		//加载四个文件夹及文件夹中的内容
-		//importFourDirs();
+		importFourDirs(projPath);
 	}
-
+	
 	public void editProject() {
 
 	}
 
 	public void closeProject() {
-		
+		//关闭项目之前先要保存项目
+		saveProject();
+		//TODO: 关闭项目后跳转到哪个页面？
 	}
 	
 	public void saveProject(){
-		//把要保存的项目内容以json的形式传过来？
+		//保存当前项目
+		//1. 保存各个目录下的文件 2. 保存xml .project (更新其中的四个子目录的信息)  
 	}
 	
 	//项目切换时，由于系统中只有一个项目对象，因此需要将旧的项目的信息清空一下
+	//需要单独的clear吗？直接在import和open中操作就可以吧？
 	public void clearPrevProject(){
 		//TODO: clear the previous project info.
 		//注意：只修改内存中的数据(Project类)，不能修改硬盘上(上一个项目存储位置)的数据
+	}
+	
+	//The following are Debug Codes:
+	public void showProject(Project project){
+		System.out.println("Project Name: " + project.projectName);
+		System.out.println("Saved Path: " + project.savedPath);
+		System.out.println("Author: " + project.author);
+		System.out.println("Date: " + project.date);
+		System.out.println("Comments: " + project.comments);
 	}
 }
