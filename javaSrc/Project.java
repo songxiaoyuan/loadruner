@@ -25,6 +25,8 @@ public class Project {
 	private List<Scene> scenes;
 	private List<Script> scripts;
 	
+	private List<Project> openedProjs;	//打开的项目列表，这样太吃内存了吧？只存路径？
+	
 	//Singleton	//系统中永远只有一个项目(处于使用中的项目)
 	private Project(){}
 	private static final Project project = new Project();
@@ -43,7 +45,7 @@ public class Project {
 	 * "Saved path from frontend", "author": "author of the project", "date":
 	 * "date of the creation", "comments": "comments of the project"
 	 * */
-	public void createProject(String jsonStr) {
+	public int createProject(String jsonStr) {
 		// TODO: When create a new project, we must ask the user if it is ok to
 		// close current project.
 
@@ -59,7 +61,6 @@ public class Project {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd");
 		try{
 			project.date = df.parse(object.get("date").getAsString());
-			//System.out.print(this.date);
 		}
 		catch(ParseException e){
 			log.warning(e.getMessage());
@@ -70,6 +71,8 @@ public class Project {
 		this.writeXMLProjFile();
 		// 2. Create 4 dirs
 		this.mkFourDirs();
+		
+		return 0;
 
 	}
 	public void writeXMLProjFile(){
@@ -94,22 +97,32 @@ public class Project {
 		}
 	}
 
-	public int readXMLProjFile(String projPath){
+	public void readXMLProjFile(File projFile){
 		//initialize the value of data members in Project
-		File projDir = new File(projPath);
-		File projFile = new File(projPath + File.separator + ".project");
-		if(!projDir.isDirectory() || !projFile.isFile()){
-			return -1;	//Error
-		}
-		
 		try {
 			XStream xstream = new XStream(new StaxDriver());
 			Project projTemp = (Project)xstream.fromXML(projFile);
-			showProject(projTemp);
+			project.projectName = projTemp.projectName;
+			/*
+			if(!projTemp.savedPath.equals(projFile.getParent())){
+				project.savedPath = projFile.getParent();
+			}
+			else{
+				project.savedPath = projFile.getParent();
+				//必须为project.savedPath重新赋值，这个else是必须的。防止上次打开的项目对本项目的干扰。
+			}*/
+			project.savedPath = projFile.getParent();
+			
+			System.out.println("\nxml savedPath: " + projTemp.savedPath);
+			System.out.println("getParent(): " + projFile.getParent());
+			System.out.println("project.savedPath: " + project.savedPath);
+			project.author = projTemp.author; 
+			project.date = projTemp.date;
+			project.comments= projTemp.comments;
+			showProject();
 		} catch (Exception e) {
 			log.warning(e.getMessage());
 		}
-		return 0;	//Correct
 	}
 	
 	public void mkFourDirs() {
@@ -142,16 +155,35 @@ public class Project {
 		
 	}
 	
-	public void openProject() {
+	/*
+	projPath: "/home/lxw/DWLProj"
+	*/
+	public int openProject(String projPath) {
 		// TODO: When open a project, we must ask the user if it is ok to close the current project.
+		return importProject(projPath);
 	}
 
-	public void importProject(String projPath) {
+	/*
+	projPath: "/home/lxw/MovedDWLProj"
+	*/
+	public int importProject(String projPath) {
 		// TODO: When open a project, we must ask the user if it is ok to close the current project.
+		File projDir = new File(projPath);
+		if(!projDir.isDirectory()){
+			return -1;	//Error
+		}
+		File projFile = new File(projPath + File.separator + ".project");
+		if(!projFile.isFile()){
+			return -1;	//Error
+		}
 		clearPrevProject();
-		readXMLProjFile(projPath);
+		readXMLProjFile(projFile);
+		
 		//加载四个文件夹及文件夹中的内容
 		importFourDirs(projPath);
+		
+		//TODO: 修改opendProjs
+		return 0;
 	}
 	
 	public void editProject() {
@@ -164,9 +196,30 @@ public class Project {
 		//TODO: 关闭项目后跳转到哪个页面？
 	}
 	
-	public void saveProject(){
-		//保存当前项目
-		//1. 保存各个目录下的文件 2. 保存xml .project (更新其中的四个子目录的信息)  
+	//保存当前项目
+	public int saveProject(){
+		//TODO: 1. 保存各个目录下的文件 
+		
+		//2. 保存xml .project (包括更新其中的四个子目录的信息)  
+		File projFile = new File(project.savedPath + File.separator + ".project");
+		if(!projFile.isFile()){
+			return -1;	//Error
+		}
+		
+		try{
+			XStream xstream = new XStream(new StaxDriver());
+			OutputStream out = new BufferedOutputStream(new FileOutputStream(projFile));
+			//自动清空文件
+			out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
+			//xstream.toXML(project, out);	//this method's output is ugly, and no "newline" can be found.
+			//自动清空文件
+			xstream.marshal(project, new PrettyPrintWriter(new OutputStreamWriter(out)));
+		} catch (Exception e) {
+			//e.printStackTrace();
+			log.warning(e.getMessage());
+		}
+		
+		return 0;
 	}
 	
 	//项目切换时，由于系统中只有一个项目对象，因此需要将旧的项目的信息清空一下
@@ -177,7 +230,7 @@ public class Project {
 	}
 	
 	//The following are Debug Codes:
-	public void showProject(Project project){
+	public void showProject(){
 		System.out.println("Project Name: " + project.projectName);
 		System.out.println("Saved Path: " + project.savedPath);
 		System.out.println("Author: " + project.author);

@@ -15,16 +15,51 @@ var Project = java.import('Project');
 //var project = new Project();
 var project = Project.getInstanceSync();
 
-//Create Project.
+/*
+//1. Create Project.
 //TODO: the jsonString should be from the frontend.
 var jsonString = "{\"projectName\": \"DWL\", " + 
 				 "\"savedPath\": \"/home/lxw/DWLProj\", " + 
 				 "\"author\": \"lxw\", " + 
 				 "\"date\": \"2016.06.02\", " + 
 				 "\"comments\": \"No comments\"}";
-project.createProjectSync(jsonString);
-console.log("Project is created successfully.");
+var result = project.createProjectSync(jsonString);
+if(result == 0)
+	console.log(result + " Project is created successfully.");
+else
+	console.log(result + " [Error] Creating Errors")
+	*/
 
-//Load Project.
-project.importProjectSync("/home/lxw/DWLProj");
-console.log("Project is imported successfully.");
+//2. Import Project.
+result = project.importProjectSync("/home/lxw/MovedDWLProj");
+if(result == 0)
+	console.log(result + " /home/lxw/MovedDWLProj is imported successfully.\n");
+else
+	console.log(result + " [Error] Importing Errors")
+
+//4. Save Project.
+result = project.saveProjectSync();
+if(result == 0)
+	console.log(result + " /home/lxw/MovedDWLProj is saved successfully.");
+else
+	console.log(result + " [Error] Save Errors");
+
+//3. Open Project.
+result = project.openProjectSync("/home/lxw/DWLProj");
+if(result == 0)
+	console.log(result + " /home/lxw/DWLProj is opened successfully.\n");
+else
+	console.log(result + " [Error] Open Errors");
+
+//4. Save Project.
+result = project.saveProjectSync();
+if(result == 0)
+	console.log(result + " /home/lxw/DWLProj is saved successfully.");
+else
+	console.log(result + " [Error] Save Errors");
+/*
+*/
+
+//5. Close Project.
+project.closeProjectSync();
+console.log("/home/lxw/DWLProj is closed successfully.");
