@@ -28,7 +28,7 @@ if(result == 0)
 	console.log(result + " Project is created successfully.");
 else
 	console.log(result + " [Error] Creating Errors")
-/*	*/
+
 
 //2. Import Project.
 result = project.importProjectSync("/home/lxw/MovedDWLProj");

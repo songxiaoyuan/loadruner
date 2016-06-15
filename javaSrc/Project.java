@@ -42,6 +42,7 @@ public class Project {
 	}
 
 	public static final void main(String[] args) {
+		/*
 		//File f = new File("/home/lxw/Documents/");
 		File f = new File("/home/lxw/Documents/demoFile.lxw");
 		System.out.println(f.getAbsolutePath());
@@ -50,7 +51,8 @@ public class Project {
 		System.out.println(f.getParent());
 		System.out.println(f.getParentFile());
 		System.out.println(f.isAbsolute());
-		//System.out.println("lxw");
+		*/
+		System.out.println("lxw");
 	}
 
 	/*
@@ -81,25 +83,24 @@ public class Project {
 		}
 		project.comments = object.get("comments").getAsString();
 		
-		// 1. Write data into .proj file.
-		this.writeXMLProjFile();
-		// 2. Create 4 dirs
-		this.mkFourDirs();
-		
 		//TODO: the following block are debug code. DELETE them.
 		{
 			//Debug
 			File f = new File("/home/lxw/DWL.log");
-			this.reports.add(new Report(f));
-			this.reports.add(new Report(f));
-			this.results.add(new Result(f));
-			this.results.add(new Result(f));
-			this.scenes.add(new Scene(f));
-			this.scenes.add(new Scene(f));
-			this.scripts.add(new Script(f));
-			this.scripts.add(new Script(f));
+			project.reports.add(new Report(f));
+			project.reports.add(new Report(f));
+			project.results.add(new Result(f));
+			project.results.add(new Result(f));
+			project.scenes.add(new Scene(f));
+			project.scenes.add(new Scene(f));
+			project.scripts.add(new Script(f));
+			project.scripts.add(new Script(f));
 		}
 		
+		// 1. Write data into .proj file.
+		this.writeXMLProjFile();
+		// 2. Create 4 dirs
+		this.mkFourDirs();
 		return 0;
 
 	}
@@ -142,7 +143,11 @@ public class Project {
 			project.savedPath = projFile.getParent();
 			project.author = projTemp.author; 
 			project.date = projTemp.date;
-			project.comments= projTemp.comments;
+			project.comments = projTemp.comments;
+			project.reports = projTemp.reports;
+			project.results = projTemp.results;
+			project.scenes = projTemp.scenes;
+			project.scripts = projTemp.scripts;
 			showProject();
 		} catch (Exception e) {
 			log.warning(e.getMessage());
@@ -284,6 +289,10 @@ public class Project {
 		System.out.println("Author: " + project.author);
 		System.out.println("Date: " + project.date);
 		System.out.println("Comments: " + project.comments);
+		System.out.println("Reports: " + project.reports);
+		System.out.println("Results: " + project.results);
+		System.out.println("Scenes: " + project.scenes);
+		System.out.println("Scripts: " + project.scripts);
 		System.out.println();
 	}
 }
