@@ -15,7 +15,7 @@ var Project = java.import('Project');
 //var project = new Project();
 var project = Project.getInstanceSync();
 
-/*
+
 //1. Create Project.
 //TODO: the jsonString should be from the frontend.
 var jsonString = "{\"projectName\": \"DWL\", " + 
@@ -28,7 +28,7 @@ if(result == 0)
 	console.log(result + " Project is created successfully.");
 else
 	console.log(result + " [Error] Creating Errors")
-	*/
+/*	*/
 
 //2. Import Project.
 result = project.importProjectSync("/home/lxw/MovedDWLProj");
@@ -57,9 +57,10 @@ if(result == 0)
 	console.log(result + " /home/lxw/DWLProj is saved successfully.");
 else
 	console.log(result + " [Error] Save Errors");
-/*
-*/
 
 //5. Close Project.
 project.closeProjectSync();
 console.log("/home/lxw/DWLProj is closed successfully.");
+
+/*
+*/

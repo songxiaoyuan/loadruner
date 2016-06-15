@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -28,7 +29,12 @@ public class Project {
 	private List<Project> openedProjs;	//打开的项目列表，这样太吃内存了吧？只存路径？
 	
 	//Singleton	//系统中永远只有一个项目(处于使用中的项目)
-	private Project(){}
+	private Project(){
+		this.reports = new LinkedList<Report>();
+		this.results = new LinkedList<Result>();
+		this.scenes = new LinkedList<Scene>();
+		this.scripts = new LinkedList<Script>();
+	}
 	private static final Project project = new Project();
 	private static final Logger log = MyLogger.getInstance();
 	public static Project getInstance(){
@@ -36,7 +42,15 @@ public class Project {
 	}
 
 	public static final void main(String[] args) {
-		System.out.println("lxw");
+		//File f = new File("/home/lxw/Documents/");
+		File f = new File("/home/lxw/Documents/demoFile.lxw");
+		System.out.println(f.getAbsolutePath());
+		System.out.println(f.getAbsoluteFile());
+		System.out.println(f.getName());
+		System.out.println(f.getParent());
+		System.out.println(f.getParentFile());
+		System.out.println(f.isAbsolute());
+		//System.out.println("lxw");
 	}
 
 	/*
@@ -72,6 +86,20 @@ public class Project {
 		// 2. Create 4 dirs
 		this.mkFourDirs();
 		
+		//TODO: the following block are debug code. DELETE them.
+		{
+			//Debug
+			File f = new File("/home/lxw/DWL.log");
+			this.reports.add(new Report(f));
+			this.reports.add(new Report(f));
+			this.results.add(new Result(f));
+			this.results.add(new Result(f));
+			this.scenes.add(new Scene(f));
+			this.scenes.add(new Scene(f));
+			this.scripts.add(new Script(f));
+			this.scripts.add(new Script(f));
+		}
+		
 		return 0;
 
 	}
@@ -103,7 +131,7 @@ public class Project {
 			XStream xstream = new XStream(new StaxDriver());
 			Project projTemp = (Project)xstream.fromXML(projFile);
 			project.projectName = projTemp.projectName;
-			/*
+			/*//This comment block is equal to the following one line.
 			if(!projTemp.savedPath.equals(projFile.getParent())){
 				project.savedPath = projFile.getParent();
 			}
@@ -112,10 +140,6 @@ public class Project {
 				//必须为project.savedPath重新赋值，这个else是必须的。防止上次打开的项目对本项目的干扰。
 			}*/
 			project.savedPath = projFile.getParent();
-			
-			System.out.println("\nxml savedPath: " + projTemp.savedPath);
-			System.out.println("getParent(): " + projFile.getParent());
-			System.out.println("project.savedPath: " + project.savedPath);
 			project.author = projTemp.author; 
 			project.date = projTemp.date;
 			project.comments= projTemp.comments;
@@ -130,19 +154,19 @@ public class Project {
 			String prefix = project.savedPath + File.separator;
 			
 			File projDir = new File(prefix + "script");
-			if (!projDir.exists()) {
+			if (!projDir.isDirectory()) {
 				projDir.mkdirs();
 			}
 			projDir = new File(prefix + "scene");
-			if (!projDir.exists()) {
+			if (!projDir.isDirectory()) {
 				projDir.mkdirs();
 			}
 			projDir = new File(prefix + "result");
-			if (!projDir.exists()) {
+			if (!projDir.isDirectory()) {
 				projDir.mkdirs();
 			}
 			projDir = new File(prefix + "report");
-			if (!projDir.exists()) {
+			if (!projDir.isDirectory()) {
 				projDir.mkdirs();
 			}
 		} catch (Exception e) {
@@ -167,7 +191,7 @@ public class Project {
 	projPath: "/home/lxw/MovedDWLProj"
 	*/
 	public int importProject(String projPath) {
-		// TODO: When open a project, we must ask the user if it is ok to close the current project.
+		// TODO: When import a project, we must ask the user if it is ok to close the current project.
 		File projDir = new File(projPath);
 		if(!projDir.isDirectory()){
 			return -1;	//Error
@@ -182,7 +206,7 @@ public class Project {
 		//加载四个文件夹及文件夹中的内容
 		importFourDirs(projPath);
 		
-		//TODO: 修改opendProjs
+		//TODO: 修改openedProjs
 		return 0;
 	}
 	
@@ -199,6 +223,7 @@ public class Project {
 	//保存当前项目
 	public int saveProject(){
 		//TODO: 1. 保存各个目录下的文件 
+		//... ...
 		
 		//2. 保存xml .project (包括更新其中的四个子目录的信息)  
 		File projFile = new File(project.savedPath + File.separator + ".project");
@@ -222,6 +247,29 @@ public class Project {
 		return 0;
 	}
 	
+	public int addResources(String resource){
+		//TODO: 确定怎么存储四个目录下的内容再写这个函数
+		//resource: Dir/File. Must be the absolute Path.
+		File resPath = new File(resource);
+		//new File(project.savedPath + File.separator + ".project");
+		if(resPath.isFile()){
+			//导入单个文件
+			String fileName = resPath.getName();
+		}
+		else if(resPath.isDirectory()){
+			//导入整个目录
+			
+		}
+		else{
+			return -1;
+		}
+		return 0;
+	}
+	
+	public int removeResources(String resource){
+		return 0;
+	}
+	
 	//项目切换时，由于系统中只有一个项目对象，因此需要将旧的项目的信息清空一下
 	//需要单独的clear吗？直接在import和open中操作就可以吧？
 	public void clearPrevProject(){
@@ -236,5 +284,6 @@ public class Project {
 		System.out.println("Author: " + project.author);
 		System.out.println("Date: " + project.date);
 		System.out.println("Comments: " + project.comments);
+		System.out.println();
 	}
 }
