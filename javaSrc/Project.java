@@ -5,10 +5,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -51,6 +48,26 @@ public class Project {
 	private List<Script> scripts;
 	*/
 	
+	//Setter
+	public String getProjectName(){
+		return project.projectName;
+	}
+	
+	public String getSavedPath(){
+		return project.savedPath;
+	}
+	
+	public String getAuthor(){
+		return project.author;
+	}
+	
+	public String getDate(){
+		return project.date.toString();
+	}
+	
+	public String getComments(){
+		return project.comments;
+	}
 	//@XStreamOmitFiled
 	private static Set<OpenedProject> openedProjs;	//打开的项目列表
 	
@@ -341,18 +358,22 @@ public class Project {
 		return 0;
 	}
 	
-	public int addResources(String resource){
-		//TODO: 确定怎么存储四个目录下的内容再写这个函数
-		//resource: Dir/File. Must be the absolute Path.
-		File resPath = new File(resource);
-		//new File(project.savedPath + File.separator + ".project");
-		if(resPath.isFile()){
+	public int addResources(String src, String dest){
+		/*
+		//TODO:
+		这个工作建议还是放到前端去做,原因有以下几点：
+		1. 增加资源（文件／文件夹），后端的.project XML文件没有必要记录这些文件，因此无需通知后端
+		2. ＊ 如果拷贝文件的操作在后端执行，拷贝操作（写操作）和前端的写操作可能发生冲突 
+		*/
+		
+		//src & dest: Dir/File. Must be the absolute Path.
+		File srcPath = new File(src);
+		File destPath = new File(dest);
+		if(srcPath.isFile()){
 			//导入单个文件
-			String fileName = resPath.getName();
 		}
-		else if(resPath.isDirectory()){
+		else if(srcPath.isDirectory()){
 			//导入整个目录
-			
 		}
 		else{
 			return -1;
@@ -370,8 +391,8 @@ public class Project {
 	    for(OpenedProject op : openedProjs){
 	    	//NOTE: 不能以名称作为主键，否则无法添加重名的项目
 	    	//object.addProperty(op.projectName, op.savedPath);
-	    	//object.addProperty(op.savedPath, op.projectName);	//按照timestamp的由大到小的顺序排序
-	    	object.addProperty(op.savedPath, op.timestamp);
+	    	object.addProperty(op.savedPath, op.projectName);	//按照timestamp的由大到小的顺序排序
+	    	//object.addProperty(op.savedPath, op.timestamp);
 	    }
 	    String jsonStr = object.toString();   // 将json对象转化成json字符串
 		return jsonStr;
@@ -391,12 +412,6 @@ public class Project {
 		System.out.println("Author: " + project.author);
 		System.out.println("Date: " + project.date);
 		System.out.println("Comments: " + project.comments);
-		/*
-		System.out.println("Reports: " + project.reports);
-		System.out.println("Results: " + project.results);
-		System.out.println("Scenes: " + project.scenes);
-		System.out.println("Scripts: " + project.scripts);
-		*/
 		System.out.println("Opened Projects:" + openedProjs);
 		System.out.println();
 	}

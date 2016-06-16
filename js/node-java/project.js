@@ -93,3 +93,10 @@ console.log("/home/lxw/DWLProj is closed successfully.");
 //Show the opened Projects.
 console.log("The opened Projects are as follows: ");
 console.log(project.getOpenedProjectsSync());
+
+
+console.log("Project Name: " + project.getProjectNameSync());
+console.log("Saved Path: " + project.getSavedPathSync());
+console.log("Author: " + project.getAuthorSync());
+console.log("Date: " + project.getDateSync());
+console.log("Comments: " + project.getCommentsSync());
