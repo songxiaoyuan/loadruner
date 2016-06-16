@@ -6,8 +6,9 @@ import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import com.google.gson.*;
@@ -16,24 +17,47 @@ import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 public class Project {
+	//inner class only for openedProject.
+	private class OpenedProject implements Comparable{
+		private String projectName;
+		private String savedPath;
+		private long timestamp;	//most recent access time.
+		public OpenedProject(String projectName, String savedPath, long timestamp){
+			this.projectName = projectName;
+			this.savedPath = savedPath;
+			this.timestamp = timestamp;
+		}
+		@Override
+		public int compareTo(Object obj) {
+			OpenedProject op = (OpenedProject)obj;
+	        return new Long(timestamp).compareTo(new Long(op.timestamp)) * (-1);	//reverse the order
+		}
+	}
 	private String projectName;
 	private String savedPath;
 	private String author;
 	private Date date;
 	private String comments;
+	/*
 	private List<Report> reports;
 	private List<Result> results;
 	private List<Scene> scenes;
 	private List<Script> scripts;
+	*/
 	
-	private List<Project> openedProjs;	//打开的项目列表，这样太吃内存了吧？只存路径？
+	//@XStreamOmitFiled
+	private static Set<OpenedProject> openedProjs;	//打开的项目列表
 	
 	//Singleton	//系统中永远只有一个项目(处于使用中的项目)
 	private Project(){
+		/*
 		this.reports = new LinkedList<Report>();
 		this.results = new LinkedList<Result>();
 		this.scenes = new LinkedList<Scene>();
 		this.scripts = new LinkedList<Script>();
+		*/
+		openedProjs = new TreeSet<OpenedProject>();
+		//openedProjs = new HashSet<OpenedProject>();
 	}
 	private static final Project project = new Project();
 	private static final Logger log = MyLogger.getInstance();
@@ -52,7 +76,7 @@ public class Project {
 		System.out.println(f.getParentFile());
 		System.out.println(f.isAbsolute());
 		*/
-		System.out.println("lxw");
+		System.out.println(new Date().getTime());
 	}
 
 	/*
@@ -83,7 +107,8 @@ public class Project {
 		}
 		project.comments = object.get("comments").getAsString();
 		
-		//TODO: the following block are debug code. DELETE them.
+		/*
+		//the following block are debug code. DELETE them.
 		{
 			//Debug
 			File f = new File("/home/lxw/DWL.log");
@@ -95,12 +120,14 @@ public class Project {
 			project.scenes.add(new Scene(f));
 			project.scripts.add(new Script(f));
 			project.scripts.add(new Script(f));
-		}
+		}*/
 		
 		// 1. Write data into .proj file.
 		this.writeXMLProjFile();
 		// 2. Create 4 dirs
 		this.mkFourDirs();
+		
+		this.updateOpenedProjs();
 		return 0;
 
 	}
@@ -144,11 +171,12 @@ public class Project {
 			project.author = projTemp.author; 
 			project.date = projTemp.date;
 			project.comments = projTemp.comments;
+			/*
 			project.reports = projTemp.reports;
 			project.results = projTemp.results;
 			project.scenes = projTemp.scenes;
 			project.scripts = projTemp.scripts;
-			showProject();
+			*/
 		} catch (Exception e) {
 			log.warning(e.getMessage());
 		}
@@ -181,7 +209,7 @@ public class Project {
 	}
 	
 	public void importFourDirs(String projPath){
-		
+		//TODO: No need to import Four Dirs in the backend, right?
 	}
 	
 	/*
@@ -209,10 +237,30 @@ public class Project {
 		readXMLProjFile(projFile);
 		
 		//加载四个文件夹及文件夹中的内容
-		importFourDirs(projPath);
+		//importFourDirs(projPath);
 		
-		//TODO: 修改openedProjs
+		updateOpenedProjs();
+		
+		showProject();
 		return 0;
+	}
+	
+	public void updateOpenedProjs(){
+		//修改openedProjs: 把当前项目添加到最近访问的项目列表中，但不能直接添加，如果已经添加过了，需要修改其中的最近访问时间戳
+		//openedProjs.add(new OpenedProject(project.projectName, project.savedPath, new Date().getTime()));
+		if(openedProjs.isEmpty()){
+			openedProjs.add(new OpenedProject(project.projectName, project.savedPath, new Date().getTime()));
+		}
+		else {
+			for (OpenedProject op : openedProjs) {
+				if (op.savedPath.equals(project.savedPath)) {
+					op.timestamp = new Date().getTime();
+				}
+				else{
+					openedProjs.add(new OpenedProject(project.projectName, project.savedPath, new Date().getTime()));
+				}
+			}
+		}
 	}
 	
 	public void editProject() {
@@ -275,6 +323,19 @@ public class Project {
 		return 0;
 	}
 	
+	//return a json string.
+	public String getOpenedProjects(){
+	    JsonObject object = new JsonObject();  // 创建一个json对象
+	    for(OpenedProject op : openedProjs){
+	    	//NOTE: 不能以名称作为主键，否则无法添加重名的项目
+	    	//object.addProperty(op.projectName, op.savedPath);
+	    	//object.addProperty(op.savedPath, op.projectName);	//按照timestamp的由大到小的顺序排序
+	    	object.addProperty(op.savedPath, op.timestamp);
+	    }
+	    String jsonStr = object.toString();   // 将json对象转化成json字符串
+		return jsonStr;
+	}
+	
 	//项目切换时，由于系统中只有一个项目对象，因此需要将旧的项目的信息清空一下
 	//需要单独的clear吗？直接在import和open中操作就可以吧？
 	public void clearPrevProject(){
@@ -289,10 +350,13 @@ public class Project {
 		System.out.println("Author: " + project.author);
 		System.out.println("Date: " + project.date);
 		System.out.println("Comments: " + project.comments);
+		/*
 		System.out.println("Reports: " + project.reports);
 		System.out.println("Results: " + project.results);
 		System.out.println("Scenes: " + project.scenes);
 		System.out.println("Scripts: " + project.scripts);
+		*/
+		System.out.println("Opened Projects:" + openedProjs);
 		System.out.println();
 	}
 }
