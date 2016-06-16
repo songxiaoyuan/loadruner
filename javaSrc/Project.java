@@ -5,16 +5,22 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Logger;
+
 
 import com.google.gson.*;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
+
 
 public class Project {
 	//inner class only for openedProject.
@@ -252,6 +258,41 @@ public class Project {
 			openedProjs.add(new OpenedProject(project.projectName, project.savedPath, new Date().getTime()));
 		}
 		else {
+			List<OpenedProject> opList = new LinkedList<OpenedProject>(openedProjs);
+			boolean accessAgain = false;
+			for(OpenedProject op : opList){
+				if (op.savedPath.equals(project.savedPath)) {
+					op.timestamp = new Date().getTime();
+					accessAgain = true;
+				}
+			}
+			if(!accessAgain){
+				openedProjs.add(new OpenedProject(project.projectName, project.savedPath, new Date().getTime()));
+			}
+			else{
+				//System.out.println("Access Again");
+				openedProjs.clear();
+				//System.out.println("openedProjs.size(): " + openedProjs.size());	//0
+				for(OpenedProject op : opList){
+					openedProjs.add(op);
+				}
+			}
+			/*
+			//Method 1: NO: "java.util.ConcurrentModificationException"
+			//Modify the value during the cycle.
+			Iterator<OpenedProject> opIter = openedProjs.iterator();
+			while(opIter.hasNext()){
+				OpenedProject op = opIter.next();
+				if (op.savedPath.equals(project.savedPath)) {
+					op.timestamp = new Date().getTime();
+				}
+				else{
+					openedProjs.add(new OpenedProject(project.projectName, project.savedPath, new Date().getTime()));
+				}
+			}*/
+			/*
+			//Method 2: NO: "java.util.ConcurrentModificationException"
+			//Modify the value during the cycle.
 			for (OpenedProject op : openedProjs) {
 				if (op.savedPath.equals(project.savedPath)) {
 					op.timestamp = new Date().getTime();
@@ -259,7 +300,7 @@ public class Project {
 				else{
 					openedProjs.add(new OpenedProject(project.projectName, project.savedPath, new Date().getTime()));
 				}
-			}
+			}*/
 		}
 	}
 	
