@@ -161,6 +161,7 @@ var createProjectModalPage={
 	//creatProjectModalFooterConfirm按钮click时的操作。保存一些路径信息，删除整个modal，然后显示整个背景项目等div！！
 	creatProjectModalFooterConfirmOnClick:function(){
 		//TODO 保存信息到本地，
+		projectOperation.createProject();
 
 		//创建背景的所有div.
 		projectDescription.initialize();
