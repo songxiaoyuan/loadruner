@@ -11,17 +11,17 @@ var projectOperation = {
 		projectOperation.project = Project.getInstanceSync();
 	},
 	//创建一个项目
-	createProject:function(){
-		var projectJson = {};
-		projectJson.projectName = "Project1";
-		projectJson.savedPath = "/home/sxy/Project";
-		projectJson.author = "sxy";
-		projectJson.date = "2016.06.22";
-		projectJson.comments = "comments of the project";
+	createProject:function(projectJsonString_){
+		// var projectJson = {};
+		// projectJson.projectName = "Project1";
+		// projectJson.savedPath = "/home/sxy/Project";
+		// projectJson.author = "sxy";
+		// projectJson.date = "2016.06.22";
+		// projectJson.comments = "comments of the project";
 
-		var projectJsonString = JSON.stringify(projectJson);
+		// var projectJsonString = JSON.stringify(projectJson);
 
-		var result = projectOperation.project.createProjectSync(projectJsonString);
+		var result = projectOperation.project.createProjectSync(projectJsonString_);
 		if(result == 0)
 			console.log(result + " Project is created successfully.");
 		else
@@ -47,12 +47,33 @@ var projectOperation = {
 		else
 			console.log(result + " [Error] Open Errors");
 	},
-	saveProject:function(){
+	saveProject:function(projectJsonString_){
 		var result = projectOperation.project.saveProjectSync();
 		if(result == 0)
 			console.log(result + " /home/sxy/TmpDWLProj is saved successfully.");
 		else
 			console.log(result + " [Error] Save Errors");
 	},
+
+	getProjectName:function(){
+		return projectOperation.project.getProjectNameSync();
+	},
+
+	getProjectSavePath:function(){
+		return projectOperation.project.getSavedPathSync();
+	},
+
+	getProjectAuthor:function(){
+		return projectOperation.project.getAuthorSync();
+	},
+
+	getProjectCreateDate:function(){
+		return projectOperation.project.getDateSync();
+	},
+
+	getProjectComments:function(){
+		return projectOperation.project.getCommentsSync();
+	},
+
 }
 

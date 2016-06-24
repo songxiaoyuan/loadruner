@@ -129,6 +129,7 @@ var projectDescription = {
 			'id':'projectDetailsHeader',
 			'text':'项目信息'
 		});
+		//项目的以后信息通过projectOperation获取，并且展示出来。
 		var projectDetailsContent = $('<form>',{
 			'class':'projectDetailsContent'
 		});
@@ -146,7 +147,8 @@ var projectDescription = {
 		});
 		var projectNameInput = $('<input>',{
 			'type':'text',
-			'placeholder':'project1'
+			'id':'projectDetailsContentProjectNameInput',
+			'value':projectOperation.getProjectName()
 		});
 		projectName.append(projectNameLabel);
 		projectName.append(projectNameInput);
@@ -161,6 +163,7 @@ var projectDescription = {
 		});
 		var projectNumberInput = $('<input>',{
 			'type':'text',
+			'id':'projectDetailsContentProjectNumberInput',
 			'placeholder':'xxxxxxxx'
 		});
 		projectNumber.append(projectNumberLabel);
@@ -175,7 +178,8 @@ var projectDescription = {
 		});
 		var savePathInput = $('<input>',{
 			'type':'text',
-			'placeholder':'/home/user/project1'  //注意这个是用来提示输入的，真正的值应该是value！！！
+			'id':'projectDetailsContentSavePathInput',
+			'value':projectOperation.getProjectSavePath()  //注意这个是用来提示输入的，真正的值应该是value！！！
 		});
 		savePath.append(savePathLabel);
 		savePath.append(savePathInput);
@@ -189,7 +193,8 @@ var projectDescription = {
 		});
 		var projectFounderInput = $('<input>',{
 			'type':'text',
-			'placeholder':'陈光'
+			'id':'projectDetailsContentProjectFounderInput',
+			'value':projectOperation.getProjectAuthor()
 		});
 		projectFounder.append(projectFounderLabel);
 		projectFounder.append(projectFounderInput);
@@ -204,6 +209,7 @@ var projectDescription = {
 		var projectCreateDateInput = $('<input>',{
 			'id':'projectDetailsSelectDate',
 			'type':'text',
+			'value':projectOperation.getProjectCreateDate()
 		});
 		projectCreateDate.append(projectCreateDateLabel);
 		projectCreateDate.append(projectCreateDateInput);
@@ -217,6 +223,7 @@ var projectDescription = {
 		});
 		var projectPrincipalInput = $('<input>',{
 			'type':'text',
+			'id':'projectDetailsContentProjectPrincipalInput',
 			'placeholder':'张一山'
 		});
 		projectPrincipal.append(projectPrincipalLabel);
@@ -231,6 +238,7 @@ var projectDescription = {
 		});
 		var projectParticipationInput = $('<input>',{
 			'type':'text',
+			'id':'projectDetailsContentProjectParticipationInput',
 			'placeholder':'张一山、李小龙'
 		});
 		projectParticipation.append(projectParticipationLabel);
@@ -245,6 +253,7 @@ var projectDescription = {
 		});
 		var projectExecutionTimeInput = $('<input>',{
 			'type':'text',
+			'id':'projectDetailsContentProjectExecutionTimeInput',
 			'placeholder':'2016.02.22-2016.03.20'
 		});
 		projectExecutionTime.append(projectExecutionTimeLabel);
@@ -259,7 +268,8 @@ var projectDescription = {
 		});
 		var remarkInfoInput = $('<input>',{
 			'type':'text',
-			'placeholder':''
+			'id':'projectDetailsContentRemarkInfoInput',
+			'value':projectOperation.getProjectComments()
 		});
 		remarkInfo.append(remarkInfoLabel);
 		remarkInfo.append(remarkInfoInput);
@@ -297,6 +307,22 @@ var projectDescription = {
 	},
 
 	projectDetailsSaveButtonOnClick:function(){
-		window.alert('projectDetailsSaveButtonOnClick');
+		var projectJson = {};
+		projectJson.projectName = $('#projectDetailsContentProjectNameInput')[0].value;
+		projectJson.projectNumber = $('#projectDetailsContentProjectNumberInput')[0].value;
+		projectJson.savedPath = $('#projectDetailsContentSavePathInput')[0].value;
+		projectJson.author = $('#projectDetailsContentProjectFounderInput')[0].value;
+		projectJson.date = $('#projectDetailsSelectDate')[0].value;
+		projectJson.principal = $('#projectDetailsContentProjectPrincipalInput')[0].value;
+		projectJson.participation = $('#projectDetailsContentProjectParticipationInput')[0].value;
+		projectJson.executionTime = $('#projectDetailsContentProjectExecutionTimeInput')[0].value;
+		projectJson.comments = $('#projectDetailsContentRemarkInfoInput')[0].value;
+
+		// console.log(projectJson);
+
+		var projectJsonString = JSON.stringify(projectJson);
+
+		projectOperation.saveProject(projectJsonString);
+		// window.alert('projectDetailsSaveButtonOnClick');
 	},
 }

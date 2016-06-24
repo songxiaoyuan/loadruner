@@ -29,6 +29,7 @@ var createProjectModalPage={
 		});
 		var projectNameInput = $('<input>',{
 			'type':'text',
+			'id':'createProjectModalBodyContentProjectNameInput',
 			'placeholder':'project1'
 		});
 		projectName.append(projectNameLabel);
@@ -43,6 +44,7 @@ var createProjectModalPage={
 		});
 		var savePathInput = $('<input>',{
 			'type':'text',
+			'id':'createProjectModalBodyContentSavePathInput',
 			'placeholder':'/home/user/project1'  //注意这个是用来提示输入的，真正的值应该是value！！！
 		});
 		var savePathBrowse = $('<input>',{
@@ -62,6 +64,7 @@ var createProjectModalPage={
 		});
 		var projectFounderInput = $('<input>',{
 			'type':'text',
+			'id':'createProjectModalBodyContentProjectFounderInput',
 			'placeholder':'陈光'
 		});
 		projectFounder.append(projectFounderLabel);
@@ -81,7 +84,7 @@ var createProjectModalPage={
 		var selectSpan = $('<button>',{
 		  'text':'选择',
 		  'id':'selectDateButton',
-		  'data-date':'2016.04.22',
+		  'data-date':'2016.06.22',
 		  'data-date-format':'yyyy.mm.dd'
 		});
 		projectCreateDate.append(projectCreateDateLabel);
@@ -97,6 +100,7 @@ var createProjectModalPage={
 		});
 		var remarkInfoInput = $('<input>',{
 			'type':'text',
+			'id':'createProjectModalBodyContentRemarkInfoInput',
 			'placeholder':'测试项目'
 		});
 		remarkInfo.append(remarkInfoLabel);
@@ -161,7 +165,18 @@ var createProjectModalPage={
 	//creatProjectModalFooterConfirm按钮click时的操作。保存一些路径信息，删除整个modal，然后显示整个背景项目等div！！
 	creatProjectModalFooterConfirmOnClick:function(){
 		//TODO 保存信息到本地，
-		projectOperation.createProject();
+		var projectJson = {};
+		projectJson.projectName = $('#createProjectModalBodyContentProjectNameInput')[0].value;
+		projectJson.savedPath = $('#createProjectModalBodyContentSavePathInput')[0].value+'/'+projectJson.projectName;
+		projectJson.author = $('#createProjectModalBodyContentProjectFounderInput')[0].value;
+		projectJson.date = $('#selectDate')[0].value;
+		projectJson.comments = $('#createProjectModalBodyContentRemarkInfoInput')[0].value;
+
+		// console.log(projectJson);
+
+		var projectJsonString = JSON.stringify(projectJson);
+
+		projectOperation.createProject(projectJsonString);
 
 		//创建背景的所有div.
 		projectDescription.initialize();

@@ -85,6 +85,18 @@ var creatProjectFromExistedModalPage = {
 		var selectSpanButton=ret.find('#selectDateButton');
 		selectDateInput.attr('id','creatProjectFromExistedBody2SelectDate');
 		selectSpanButton.attr('id','creatProjectFromExistedBody2SelectDateButton');
+
+		var projectNameInput = ret.find('#createProjectModalBodyContentProjectNameInput');
+		projectNameInput.attr('id','creatProjectFromExistedBody2ProjectNameInput');
+
+		var savePathInput = ret.find('#createProjectModalBodyContentSavePathInput');
+		savePathInput.attr('id','creatProjectFromExistedBody2SavePathInput');
+
+		var projectFounderInput = ret.find('#createProjectModalBodyContentProjectFounderInput');
+		projectFounderInput.attr('id','creatProjectFromExistedBody2ProjectFounderInput');
+
+		var remarkInfoInput = ret.find('#createProjectModalBodyContentRemarkInfoInput');
+		remarkInfoInput.attr('id','creatProjectFromExistedBody2RemarkInfoInput');
 		return  ret;
 	},
 
